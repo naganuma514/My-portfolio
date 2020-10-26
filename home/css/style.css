@@ -309,7 +309,7 @@ section h2 span {
 	#sidebarWrap{
 		position: relative;
 		width: 100%;
-		height: 60px;
+		height: 10px;
 		background: #fff;
 		border-bottom: 1px solid #ccc;
 	}
@@ -394,7 +394,7 @@ section h2 span {
 
 	#mainnav{
 		position: absolute;
-		top: 0;
+		top: 100px;
 		width: 100%;
 		text-align: right;
 	}
