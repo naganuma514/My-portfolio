@@ -14,7 +14,7 @@
 		<div id="wrapper">
 		<div id="sidebar">
 			<div id="sidebarWrap">
-				<h1 width="87" height="0">chou chou <br>ゲスト様</h1>
+				<h1>chou chou <br>ゲスト様</h1>
 				<nav id="mainnav">
 					<p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
 					<div class="panel">

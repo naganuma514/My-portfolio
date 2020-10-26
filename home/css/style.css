@@ -36,11 +36,12 @@ a:active, a:focus,input:active, input:focus{outline:0;}
 
 /* ヘッダー
 ------------------------------------------------------------*/
-
 #mainnav a{
 	color: #000;
 	font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
 }
+
+
 /* フッター
 ------------------------------------------------------------*/
 #footer{
@@ -65,13 +66,7 @@ img{
 section{
   clear: both;
 }
-.form-frame{
-	width: 60%;
-	margin: 70px auto;
-	font-size: 22px;
-	font-weight:normal;
-	text-align: center;
-}
+
 section h2{
 	width: 60%;
 	margin: 70px auto;
@@ -192,10 +187,7 @@ section h2 span {
 	height: 100% !important;
 	border: 0;
 }
-.form-frame{
-	width: 100%;
-	float:right ;
-}
+
 
 
 /* RESPONSIVE 設定
@@ -317,7 +309,7 @@ section h2 span {
 	#sidebarWrap{
 		position: relative;
 		width: 100%;
-		height: 10px;
+		height: 60px;
 		background: #fff;
 		border-bottom: 1px solid #ccc;
 	}
@@ -402,7 +394,7 @@ section h2 span {
 
 	#mainnav{
 		position: absolute;
-		top: 100px;
+		top: 0;
 		width: 100%;
 		text-align: right;
 	}
