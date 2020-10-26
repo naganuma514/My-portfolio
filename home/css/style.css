@@ -36,12 +36,11 @@ a:active, a:focus,input:active, input:focus{outline:0;}
 
 /* ヘッダー
 ------------------------------------------------------------*/
+
 #mainnav a{
 	color: #000;
 	font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
 }
-
-
 /* フッター
 ------------------------------------------------------------*/
 #footer{
@@ -66,7 +65,13 @@ img{
 section{
   clear: both;
 }
-
+.form-frame{
+	width: 60%;
+	margin: 70px auto;
+	font-size: 22px;
+	font-weight:normal;
+	text-align: center;
+}
 section h2{
 	width: 60%;
 	margin: 70px auto;
@@ -187,7 +192,10 @@ section h2 span {
 	height: 100% !important;
 	border: 0;
 }
-
+.form-frame{
+	width: 100%;
+	float:right ;
+}
 
 
 /* RESPONSIVE 設定

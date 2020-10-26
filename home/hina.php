@@ -19,10 +19,10 @@
 					<p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
 					<div class="panel">
 						<ul>
-							<li><a href="index.php #top">トップ</a></li>
-							<li><a href="index.php #sec01">メッセージ</a></li>
-							<li><a href="index.php #sec03">スタッフ</a></li>
-							<li><a href="index.php #sec05">アクセス</a></li>
+							<li><a href="../index.php #top">トップ</a></li>
+							<li><a href="../index.php #sec01">メッセージ</a></li>
+							<li><a href="../index.php #sec03">スタッフ</a></li>
+							<li><a href="../index.php #sec05">アクセス</a></li>
 							<li><a href="">ログイン</a></li>
 							<li><a href="">ご予約</a></li>
 							<li><a href="">お問い合わせ</a></li>
