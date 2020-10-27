@@ -187,9 +187,13 @@ section h2 span {
 	height: 100% !important;
 	border: 0;
 }
-
-
-
+/* ここから俺の設定*/
+.logspot {
+	text-align: center;
+}
+.logspot p {
+	font-size:2px;
+}
 /* RESPONSIVE 設定
 ------------------------------------------------------------*/
 
@@ -265,6 +269,7 @@ section h2 span {
   #footer{
 		padding: 30px 10px 70px 0;
 	}
+
 }
 
 

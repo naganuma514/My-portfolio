@@ -44,7 +44,7 @@
 			<!-- MESSAGE -->
 			<section id="sec01">
 				<header>
-					<h2><span>MESSAGE</span></h2>
+					<section><h2>MESSAGE</h2></section>
 				</header>
 				<div class="innerS">
 					お客様をキレイにして差しげるのは、もちろん、気持ちがリラックスしたり、楽しかったり、スッキリしたり、頑張っている女性が笑顔で笑って、お帰り頂ける事を大切にして日々営業させて頂いております。
