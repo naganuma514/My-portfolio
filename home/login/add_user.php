@@ -76,6 +76,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                 </nav>
             </div>
         </div>
+<<<<<<< HEAD
         <div class="logspot">
             <div class="form-frame">
                 <?php if (isset($success) && $success) : ?>
@@ -122,6 +123,50 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             </div>
         </div>
     </div>
+=======
+
+    </div>
+
+    <div class="content">
+        <?php if (isset($success) && $success) : ?>
+        <p>登録に成功しました。</p>
+        <p><a href="index.php">こちらからログインしてください。</a></p>
+        <?php else : ?>
+        <div class="form-frame">
+            <legend>新規アカウント登録フォーム</legend>
+            <h1>新規会員登録</h1>
+            <?php if (count($err) !== 0) : ?>
+            <?php foreach ($err as $e) : ?>
+            <p class="error">・<?php echo h($e); ?></p>
+            <?php endforeach; ?>
+            <?php endif; ?>
+            <form action="" method="post">
+                <p>
+                    <label class="form-frame__label" for="user_name">ユーザー名</label>
+                    <input id="user_name" name="user_name" type="text" />
+                </p>
+                <p>
+                    <label class="form-frame__label" for="email">メールアドレス</label>
+                    <input id="email" name="email" type="text" />
+                </p>
+                <p>
+                    <label class="form-frame__label" for="password">パスワード</label>
+                    <input id="password" name="password" type="password" />
+                </p>
+                <p>
+                    <label class="form-frame__label" for="password_conf">確認用パスワード</label>
+                    <input id="password_conf" name="password_conf" type="password" />
+                </p>
+                <p>
+                    <button type="submit">登録</button>
+                </p>
+                <p>
+                    <a href="index.php">ログイン</a>
+                </p>
+            </form>
+        </div>
+        <?php endif; ?>
+>>>>>>> main
 </body>
 
 </html>
