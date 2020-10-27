@@ -12,14 +12,10 @@ object,embed{vertical-align:top;}
 legend{display:none;}
 h1,h2,h3,h4,h5,h6{font-size:100%;}
 img,abbr,acronym,fieldset{border:0;}
-
 body{
 	font: 14px/1.9 'Noto Sans JP', Arial, Verdana, 游ゴシック, YuGothic,'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', メイリオ, Meiryo,sans-serif;
 	font-weight: 300;
 	-webkit-text-size-adjust:100%;
-	overflow-x: hidden;
-	color: #000;
-	background: #fff;
 }
 
 a{
@@ -40,174 +36,126 @@ a:active, a:focus,input:active, input:focus{outline:0;}
 	color: #000;
 	font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
 }
-
-
-/* フッター
-------------------------------------------------------------*/
-#footer{
-	clear: both;
-	padding: 50px 10px 50px 0;
-	text-align: center;
-	font-size: 12px;
-}
-
-
 /* 共通
 ------------------------------------------------------------*/
 h1, h2{
 	font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
 }
-
-img{
-	max-width: 100%;
-	height: auto;
-}
-
 section{
   clear: both;
 }
+/* layout */
+body,p,form,input{margin: 0}
+#form{
+  width: 300px;
+  margin: 5px auto;
+  padding: 50px 55px 50px 50px;
+  border: 1px solid #555;
+  }
 
-section h2{
-	width: 60%;
-	margin: 70px auto;
-	font-size: 22px;
-	font-weight:normal;
-	text-align: center;
-}
+form p{
+    font-size: 14px;
+    }
 
-section h2 span {
-	padding-bottom: 20px;
-	border-bottom: 3px solid #000;
-}
+.form-title{
+  text-align: center;
+  font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
+  }
 
-.inner{
-	width: 80%;
-	margin: 0 auto;
-	padding-bottom: 50px;
-}
+.mail,.pass{
+  margin-bottom: 20px;
+  }
+  
+input[type="password"],
+input[type="text"],
+ {
+  width: 300px;
+  padding: 4px;
+  font-size: 14px;
+  }
+    
+.submit{
+  text-align: right;
+  }
 
-#sec03 .inner, #sec04 .inner{
-	border-bottom: 1px solid #a0a0a0;
-}
+/* font */
+#form p{
+  color: #077685;
+  font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
+  }
 
-.innerS{
-	width: 60%;
-	margin: 0 auto;
-	padding-bottom: 80px;
-}
+#form .form-title{
+    color: #000;
+	font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
+  font-size: 30px;
+  }
 
+/* skin */
+#form{
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 1px 10px #488a9e;
+  -moz-box-shadow: 0px 1px 10px #488a9e;
+  box-shadow: 0px 1px 10px #488a9e;
+  border: solid #4eb4c2 1px;
+  background: #fafafa;
+  }
 
-/* SEC02 Gallery
-------------------------------------------------------------*/
-#sec02{
-	padding: 0 !important;
-}
+#form .form-title{
+  padding-bottom: 6px;
+  border-bottom: 2px solid #4eb4c2;
+  margin-bottom: 20px;
 
-#sec02 header{
-	display: none;
-}
+  }
 
-#gallery{
-	overflow: hidden;
-}
-
-#gallery li{
-	float: left;
-	width: calc(100%/3);
-	line-height: 0;
-}
-#gallery li.full{
-	width: 100%;
-}
-
-
-#gallery img{
-	display: block;
-	width: 100%;
-	height: auto;
-}
-
-
-/* SEC03 BRAND
-------------------------------------------------------------*/
-.col4 .img{
-	margin: 0 auto;
-}
-
-
-
-/* SEC04 PROJECT
-------------------------------------------------------------*/
-#sec04{
-	padding-bottom: 0 !important;
-}
-
-.article{
-	clear: both;
-	overflow: hidden;
-	padding-bottom: 50px;
-}
-
-.article img{
-	float: left;
-	margin: 5px 20px 20px;
-}
-
-.article p{
-	margin-bottom: 20px;
-}
-
-
-
-/* SEC05 COMPANY
-------------------------------------------------------------*/
-#sec05 p{
-	margin-bottom: 5px;
-}
-
-.col2 li{
-	display: inline-block;
-	width: 100%;
-  margin: 20px 0;
-}
-
-#map{
-	position: relative;
-	padding-bottom: 75%;
-	height: 0;
-	overflow: hidden;
-	z-index: 0;
-}
-
-#map iframe{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100% !important;
-	height: 100% !important;
-	border: 0;
-}
-/* ここから俺の設定*/
-.logspot {
-	text-align: center;
-	padding-top: 100px;
-}
-.logspot p {
-	font-size:20px;
-	margin-left: 1.4em;
-	text-indent: -1.4em;
-}
-#user_name{
-	width: 200px;
-}
-.form-frame{
-	text-align: center;
-	padding: 10px; 
-	margin-bottom: 10px; 
-	border: 10px solid #333333;
-	width:60%;
-}
-
+.submit input,button{
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 16px;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  text-decoration: none;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 8px 6px #e3e3e3;
+  -moz-box-shadow: 0px 8px 6px #e3e3e3;
+  box-shadow: 0px 8px 6px #e3e3e3;
+  border: solid #f5fdff 4px;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#61c7e0), to(#418da8));
+  background: -moz-linear-gradient(top, #61c7e0, #418da8);
+  }
+  .submitl input {
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 16px;
+	padding: 3px;
+	text-decoration: none;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0px 8px 6px #e3e3e3;
+	-moz-box-shadow: 0px 8px 6px #e3e3e3;
+	box-shadow: 0px 8px 6px #e3e3e3;
+	border: solid #f5fdff 4px;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#aa0404), to(#a10904));
+  background: -moz-linear-gradient(top, #b60404, #aa0f04);
+	position: relative; bottom: 50px;
+	position: relative; right: 20px;
+  }
+.submit input:hover{
+  background: #37a4bf;
+ }
+ .submitl input:hover{
+	background: #8a2608;
+   }
+ .gologin{
+	position: relative; top: 150px;
+    text-align: center;
+   }
 /* RESPONSIVE 設定
 ------------------------------------------------------------*/
 
@@ -283,7 +231,7 @@ section h2 span {
   #footer{
 		padding: 30px 10px 70px 0;
 	}
-
+   
 }
 
 
@@ -295,7 +243,9 @@ section h2 span {
 	.col2 li:first-child{
 		width: 35%;
 		padding-right: 4%;
-	}
+    }
+   
+    
 }
 
 @media only screen and (max-width: 640px){
@@ -467,3 +417,4 @@ section h2 span {
 		margin: 55px auto;
 	}
 }
+

@@ -40,13 +40,12 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     <meta name="description" content="最新技術と自然との調和を目指す">
     <meta name="viewport" content="width=device-width">
     <title>Home | NOEVIER beaty studio chou chou </title>
-    <link rel="stylesheet" media="all" href="../css/style.css">
+    <link rel="stylesheet" media="all" href="../css/login.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="../js/script.js"></script>
 </head>
 
 <body id="top">
-    <div id="wrapper">
         <div id="sidebar">
             <div id="sidebarWrap">
                 <h1>chou chou <br>ゲスト様</h1>
@@ -76,52 +75,56 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                 </nav>
             </div>
         </div>
-        <div class="logspot">
-            <div class="form-frame">
-                <?php if (isset($success) && $success) : ?>
-                <p>登録に成功しました。</p>
-                <p><a href="index.php">こちらからログインしてください。</a></p>
-                <?php else : ?>
-                <legend>新規アカウント登録フォーム</legend>
-                <div id="sec04">
-                    <header>
-                        <h2><span>新規会員登録</span></h2>
-                    </header>
-                    <?php if (count($err) !== 0) : ?>
-                    <?php foreach ($err as $e) : ?>
-                    <p class="error">・<?php echo h($e); ?></p>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
-                    <form action="" method="post">
-                        <p>
-                            <label class="form-frame__label" for="user_name">ユーザー名</label>
-                            <input id="user_name" name="user_name" type="text" />
-                        </p>
-                        <p>
-                            <label class="form-frame__label" for="email">メールアドレス</label>
-                            <input id="email" name="email" type="text" />
-                        </p>
-                        <p>
-                            <label class="form-frame__label" for="password">パスワード</label>
-                            <input id="password" name="password" type="password" />
-                        </p>
-                        <p>
-                            <label class="form-frame__label" for="password_conf">確認用パスワード</label>
-                            <input id="password_conf" name="password_conf" type="password" />
-                        </p>
-                        <p>
-                            <button type="submit">登録</button>
-                        </p>
-                        <p>
-                            <a href="index.php">ログイン</a>
-                        </p>
-                    </form>
-                </div>
-                </section>
-                <?php endif;?>
+        
+
+            <?php if (isset($success) && $success) : ?>
+            <div class="gologin">
+                <p>ありがとうございます。登録に成功しました。<br>ログインへお進みください。</p>
+            <p>
+                <button class="submit" onclick="location.href='index.php'">ログインページへ</button>
+            </p>
             </div>
-        </div>
-    </div>
+            <?php else : ?>
+            <legend>新規アカウント登録フォーム</legend>
+            <div id="form">
+                <p class="form-title">新規会員登録</p>
+                <?php if (count($err) !== 0) : ?>
+                <?php foreach ($err as $e) : ?>
+                <p class="error" style="color:red;">・<?php echo h($e); ?></p>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <form action="" method="post">
+                    <p>名前</p>
+                    <p class="form-title">
+                    <p class="mail">
+                    <input id="user_name" name="user_name" type="text" autofocus>
+                    </p>
+                    <p>メールアドレス</p>
+                    <p class="form-title">
+                    <p class="mail"> 
+                        <input id="email" name="email" type="text" />
+                    </p>
+                    <p>パスワード</p>
+                    <p class="form-title">
+                    <p class="pass">
+                        <input id="password" name="password" type="password" />
+                    </p>
+                    <p>確認用パスワード</p>
+                    <p class="form-title">
+                    <p class="pass">
+                        <input id="password_conf" name="password_conf" type="password" />
+                    </p>
+                    <p>
+                    <p class="submit"><input type="submit" value="新規登録" /></p>
+                    </p>
+                    <p>
+                    <p class="submitl"><input type="submit" value="既に登録済みの方" /></p>
+                    </p>
+                </form>
+            </div>
+            <?php endif;?>
+        
+    
 </body>
 
 </html>
