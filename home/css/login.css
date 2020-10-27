@@ -38,8 +38,12 @@ a:active, a:focus,input:active, input:focus{outline:0;}
 }
 /* 共通
 ------------------------------------------------------------*/
-h1, h2{
+h1{
 	font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
+}
+h2{
+	font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
+	position: center;
 }
 section{
   clear: both;
@@ -47,9 +51,9 @@ section{
 /* layout */
 body,p,form,input{margin: 0}
 #form{
-  width: 300px;
+  width: 350px;
   margin: 5px auto;
-  padding: 50px 55px 50px 50px;
+  padding: 65px 50px 50px 50px;
   border: 1px solid #555;
   }
 
@@ -67,7 +71,7 @@ form p{
   }
   
 input[type="password"],
-input[type="text"],
+input[type="text"]
  {
   width: 300px;
   padding: 4px;
@@ -136,6 +140,9 @@ input[type="text"],
 	position: relative; top: 150px;
     text-align: center;
    }
+   #form .logmessage{
+	   color: black;
+   }
 /* RESPONSIVE 設定
 ------------------------------------------------------------*/
 
@@ -168,7 +175,7 @@ input[type="text"],
 		display:block !important;
 	}
 	
-	#sidebar h1{
+	#sidebar h2{
 		padding: 30px 0;
 	}
 
@@ -263,12 +270,12 @@ input[type="text"],
 		border-bottom: 1px solid #ccc;
 	}
 	
-	#sidebar h1{
+	#sidebar h2{
 		text-align: center;
-		padding-top: 15px;
+		padding-top: 5px;
 	}
 	
-	#sidebar h1 img{
+	#sidebar h2 img{
 		width: auto !important;
 		max-height: 25px;
 	}
