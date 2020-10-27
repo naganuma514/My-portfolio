@@ -115,11 +115,12 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                         <input id="password_conf" name="password_conf" type="password" />
                     </p>
                     <p>
+                    <div class="center">
                     <p class="submit"><input type="submit" value="新規登録" /></p>
                     </p>
-                    <p>
-                    <p class="submitl"><input type="submit" value="既に登録済みの方" /></p>
-                    </p>
+                    <p>登録が完了している方はこちらから<br>ログインして下さい。</p>
+                    <a href="index.php">ログインページ</a>
+                </div>
                 </form>
             </div>
             <?php endif;?>
