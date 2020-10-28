@@ -1,39 +1,57 @@
 <?php
-
 ini_set('display_errors', true);
 error_reporting(E_ALL);
 
-//セッションスタート。
 session_start();
 
-//DBとClassの読み込み。
+
 require 'database.php';
-require 'add_class.php';
+require 'login_class.php';
+
+if(isset($login_user)){
+    header('Location:account.php');
+}
 
 $err = [];
-$register = new Register();
+$login = new Login();
 if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
-    $err = $register->Validation();
-    $user = $register->getUserInfo();
+    $err = $login->Validation();
+    $user = $login->getUserInfo();
 
     if (count($err) === 0) {
         // DB接続
         $pdo = connect();
 
-        // ステートメント
-        $stmt = $pdo->prepare('INSERT INTO `USER` (`id`, `user_name`, `email`, `password`) VALUES (null, ?, ?, ?)');
+        // SQL、パラメータ定義
+        $stmt = $pdo->prepare('SELECT * FROM USER WHERE email = ?');
+        
+        $params = [];
+        $params[] = $user->email;
 
-        // パラメータ設定
-        $pass_hash = password_hash($user->password, PASSWORD_DEFAULT);
-        $params = [0 => $user->user_name, 1 => $user->email, 2 => $pass_hash];
+        $stmt->execute($params);
 
-        // SQL実行
-        $success = $stmt->execute($params);
+        $rows = $stmt->fetchAll();
+        
+        // パスワード検証
+        foreach ($rows as $row) {
+            $password_hash = $row['password'];
+
+            // パスワード一致
+            if (password_verify($user->password, $password_hash)) {
+                session_regenerate_id(true);
+                $_SESSION['login_user'] = $row;
+                header('Location:account.php');
+                return;
+            }
+        }
+        $err['login'] = 'ログインに失敗しました。';
     }
-}
+    }
+
 ?>
 <!doctype html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="最新技術と自然との調和を目指す">
@@ -76,28 +94,21 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     </div>
 
     <div id="content">
-        <?php if (isset($success) && $success) : ?>
-        <div class="gologin">
-            <p>ありがとうございます。登録に成功しました。<br>ログインへお進みください。</p>
-            <p>
-                <button class="submit" onclick="location.href='login_user.php'">ログインページへ</button>
-            </p>
-        </div>
-        <?php else : ?>
-        <legend>新規アカウント登録フォーム</legend>
+        <?php if (count($err) !== 0) : ?>
+        <?php foreach ($err as $e) : ?>
+        <p class="error">・<?php echo h($e); ?></p>
+        <?php endforeach; ?>
+        <?php endif; ?>
+
+        <legend>ログイン</legend>
         <div id="form">
-            <p class="form-title">新規会員登録ページ</p>
+            <p class="form-title">ログインページ</p>
             <?php if (count($err) !== 0) : ?>
             <?php foreach ($err as $e) : ?>
             <p class="error" style="color:red;">・<?php echo h($e); ?></p>
             <?php endforeach; ?>
             <?php endif; ?>
             <form action="" method="post">
-                <p>名前</p>
-                <p class="form-title">
-                <p class="mail">
-                    <input id="user_name" name="user_name" type="text" autofocus>
-                </p>
                 <p>メールアドレス</p>
                 <p class="form-title">
                 <p class="mail">
@@ -108,21 +119,14 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                 <p class="pass">
                     <input id="password" name="password" type="password" />
                 </p>
-                <p>確認用パスワード</p>
-                <p class="form-title">
-                <p class="pass">
-                    <input id="password_conf" name="password_conf" type="password" />
-                </p>
                 <p>
                 <div class="center">
                     <p class="submit"><input type="submit" value="新規登録" /></p>
                     </p>
-                    <p class="logmessage">登録が完了している方はこちらから<br><a href="login_user.php">ログイン</a>して下さい。</p>
+                    <p class="logmessage">登録がお済みで無い方はこちらから<br><a href="add_user.php">新規登録</a>して下さい。</p>
                 </div>
             </form>
         </div>
-        <?php endif;?>
-
     </div>
 </body>
 
