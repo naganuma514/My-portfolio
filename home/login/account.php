@@ -3,17 +3,13 @@ session_start();
 
 
 require 'database.php';
+require 'session.php';
 
-if (!isset($_SESSION['login_user'])) {
-    header('Location:../index.php');
-    exit;
+backUser($_SESSION['login_user']);
+if (isset($_SESSION["login_user"])) {
+    $login_user=setSession($_SESSION['login_user']);
+    loginCheck($login_user);
 }
-if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
-    unset($_SESSION['login_user']);
-    header('Location:../index.php');
-    exit;
-}
-$login_user = $_SESSION['login_user'];
 ?>
 
 <html lang="ja">
@@ -32,7 +28,12 @@ $login_user = $_SESSION['login_user'];
     <div id="wrapper">
         <div id="sidebar">
             <div id="sidebarWrap">
-                <h2>chou chou <br>ゲスト様</h2>
+            <h2>chou chou <br>
+                    <?php if (isset($login_user)) : ?>
+                    <?php echo $login_user['user_name'];?>様</h2>
+                <?php else:?>
+                ゲスト様</h2>
+                <?php endif;?>
                 <nav id="mainnav">
                     <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
                     <div class="panel">
@@ -59,17 +60,13 @@ $login_user = $_SESSION['login_user'];
                 </nav>
             </div>
         </div>
-    <?php if ($login_user) : ?>
-        <fieldset class="form-frame">
-        <legend>Successful</legend>
-            <?php foreach ($login_user as $key => $val) : ?>
-                <p><?php echo h($key); ?> : <?php echo h($val); ?></p>
-            <?php endforeach; ?>
-            <form action="" method="post">
-                <input type="submit" name="logout" value="ログアウト">
-            </form>
-        </fieldset>
+    <?php if (isset($login_user)) : ?>
+        <div class="gologin">
+                <p>ログインに成功しました。</p>
+                <p>
+                    <button class="submit" onclick="location.href='../index.php'">ホームへ戻る</button>
+                </p>
+            </div>
     <?php endif; ?>
 </body>
-
 </html>

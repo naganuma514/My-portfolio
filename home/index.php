@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once './login/session.php';
-$login_user=setSession($_SESSION["login_user"]);
+if(isset($_SESSION["login_user"])) {
+    $login_user=setSession($_SESSION["login_user"]);
+}
 ?>
 <!doctype html>
 <html lang="ja">
@@ -22,7 +24,7 @@ $login_user=setSession($_SESSION["login_user"]);
             <div id="sidebarWrap">
             <h1>chou chou <br>
                 <?php if (isset($login_user)) : ?>
-                <?php echo $login_user['user_name']; ?>様</h1> 
+                <?php echo $login_user['user_name'];?>様</h1> 
                 <?php else : ?>
                     ゲスト様</h1>
                 <?php endif;?>

@@ -11,10 +11,10 @@ session_start();
 require 'database.php';
 require 'add_class.php';
 require 'session.php';
-
-$login_user=setSession($_SESSION['login_user']);
-loginCheck($login_user);
-
+if (isset($_SESSION["login_user"])) {
+    $login_user=setSession($_SESSION['login_user']);
+    loginCheck($login_user);
+}
 $err = [];
 $register = new Register();
 if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
@@ -54,11 +54,12 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     <div id="wrapper">
         <div id="sidebar">
             <div id="sidebarWrap">
-                <h1>chou chou <br>
-                <?php if (isset($login_user)) : ?>
-                <?php echo $login_user['user_name']; ?> 様</h1>
+                <h2>chou chou <br>
+                    <?php if (isset($login_user)) : ?>
+                    <?php echo $login_user['user_name'];?>様</h2>
+                <?php else:?>
+                ゲスト様</h2>
                 <?php endif;?>
-                    ゲスト様</h1>'
                 <nav id="mainnav">
                     <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
                     <div class="panel">

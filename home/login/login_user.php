@@ -7,9 +7,11 @@ session_start();
 
 require 'database.php';
 require 'login_class.php';
+require 'session.php';
 
-if(isset($login_user)){
-    header('Location:account.php');
+if (isset($_SESSION["login_user"])) {
+    $login_user=setSession($_SESSION['login_user']);
+    loginCheck($login_user);
 }
 
 $err = [];
@@ -43,10 +45,11 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                 header('Location:account.php');
                 return;
             }
+            $err['login'] = 'ログインに失敗しました。';
         }
-        $err['login'] = 'ログインに失敗しました。';
+        
     }
-    }
+ }
 
 ?>
 <!doctype html>
@@ -66,7 +69,12 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     <div id="wrapper">
         <div id="sidebar">
             <div id="sidebarWrap">
-                <h2>chou chou <br>ゲスト様</h2>
+                <h2>chou chou <br>
+                    <?php if (isset($login_user)) : ?>
+                    <?php echo $login_user['user_name'];?>様</h2>
+                <?php else:?>
+                ゲスト様</h2>
+                <?php endif;?>
                 <nav id="mainnav">
                     <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
                     <div class="panel">
