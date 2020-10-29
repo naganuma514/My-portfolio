@@ -34,6 +34,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
 ?>
 <!doctype html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="最新技術と自然との調和を目指す">
@@ -113,7 +114,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                 <p class="pass">
                     <input id="password_conf" name="password_conf" type="password" />
                 </p>
-                <p>
+                </p>
                 <div class="center">
                     <p class="submit"><input type="submit" value="新規登録" /></p>
                     </p>

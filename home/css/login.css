@@ -106,7 +106,8 @@ input[type="text"]
   padding-bottom: 6px;
   border-bottom: 2px solid #4eb4c2;
   margin-bottom: 20px;
-
+  font-size: 30px;
+  text-align: center;
   }
 
 .submit input,button{
@@ -132,8 +133,10 @@ input[type="text"]
 .submit input:hover{
   background: #37a4bf;
  }
- .center{
+ #form .center{
 	 text-align: center;
+	 padding:300px;
+	 height: 400px;
  }
 .gologin{
 	position: relative; top: 150px;

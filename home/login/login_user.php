@@ -94,6 +94,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     </div>
 
     <div id="content">
+
         <?php if (count($err) !== 0) : ?>
         <?php foreach ($err as $e) : ?>
         <p class="error">・<?php echo h($e); ?></p>
@@ -119,15 +120,16 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                 <p class="pass">
                     <input id="password" name="password" type="password" />
                 </p>
-                <p>
+                </p>
                 <div class="center">
-                    <p class="submit"><input type="submit" value="新規登録" /></p>
-                    </p>
+                    <p class="submit"><input type="submit" value="ログイン"></p>
+                    </>
                     <p class="logmessage">登録がお済みで無い方はこちらから<br><a href="add_user.php">新規登録</a>して下さい。</p>
                 </div>
             </form>
         </div>
     </div>
+
 </body>
 
 </html>
