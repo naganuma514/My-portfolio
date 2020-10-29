@@ -63,73 +63,72 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
 </head>
 
 <body id="top">
-    <div id="sidebar">
-        <div id="sidebarWrap">
-            <h2>chou chou <br>ゲスト様</h2>
-            <nav id="mainnav">
-                <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
-                <div class="panel">
-                    <ul>
-                        <li><a href="../index.php #top">トップ</a></li>
-                        <li><a href="../index.php #sec01">メッセージ</a></li>
-                        <li><a href="../index.php #sec03">スタッフ</a></li>
-                        <li><a href="../index.php #sec05">アクセス</a></li>
-                        <li><a href="">ログイン</a></li>
-                        <li><a href="">ご予約</a></li>
-                        <li><a href="">お問い合わせ</a></li>
-                    </ul>
-                    <ul id="sns">
-                        <li><a href="#" target="_blank"><img src="../images/iconFb.png" width="20" height="20"
-                                    alt="FB"></a></li>
-                        <li><a href="#" target="_blank"><img src="../images/iconTw.png" width="20" height="20"
-                                    alt="twitter"></a></li>
-                        <li><a href="#" target="_blank"><img src="../images/iconInsta.png" width="20" height="20"
-                                    alt="Instagram"></a></li>
-                        <li><a href="#" target="_blank"><img src="../images/iconYouTube.png" width="20" height="20"
-                                    alt="You Tube"></a></li>
-                    </ul>
-                </div>
-            </nav>
+    <div id="wrapper">
+        <div id="sidebar">
+            <div id="sidebarWrap">
+                <h2>chou chou <br>ゲスト様</h2>
+                <nav id="mainnav">
+                    <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
+                    <div class="panel">
+                        <ul>
+                            <li><a href="../index.php #top">トップ</a></li>
+                            <li><a href="../index.php #sec01">メッセージ</a></li>
+                            <li><a href="../index.php #sec03">スタッフ</a></li>
+                            <li><a href="../index.php #sec05">アクセス</a></li>
+                            <li><a href="">ログイン</a></li>
+                            <li><a href="">ご予約</a></li>
+                            <li><a href="">お問い合わせ</a></li>
+                        </ul>
+                        <ul id="sns">
+                            <li><a href="#" target="_blank"><img src="../images/iconFb.png" width="20" height="20"
+                                        alt="FB"></a></li>
+                            <li><a href="#" target="_blank"><img src="../images/iconTw.png" width="20" height="20"
+                                        alt="twitter"></a></li>
+                            <li><a href="#" target="_blank"><img src="../images/iconInsta.png" width="20" height="20"
+                                        alt="Instagram"></a></li>
+                            <li><a href="#" target="_blank"><img src="../images/iconYouTube.png" width="20" height="20"
+                                        alt="You Tube"></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
         </div>
-    </div>
 
-    <div id="content">
-
-        <?php if (count($err) !== 0) : ?>
-        <?php foreach ($err as $e) : ?>
-        <p class="error">・<?php echo h($e); ?></p>
-        <?php endforeach; ?>
-        <?php endif; ?>
-
-        <legend>ログイン</legend>
-        <div id="form">
-            <p class="form-title">ログインページ</p>
+        <div id="content">
             <?php if (count($err) !== 0) : ?>
             <?php foreach ($err as $e) : ?>
-            <p class="error" style="color:red;">・<?php echo h($e); ?></p>
+            <p class="error">・<?php echo h($e); ?></p>
             <?php endforeach; ?>
             <?php endif; ?>
-            <form action="" method="post">
-                <p>メールアドレス</p>
-                <p class="form-title">
-                <p class="mail">
-                    <input id="email" name="email" type="text" />
-                </p>
-                <p>パスワード</p>
-                <p class="form-title">
-                <p class="pass">
-                    <input id="password" name="password" type="password" />
-                </p>
-                </p>
-                <div class="center">
-                    <p class="submit"><input type="submit" value="ログイン"></p>
-                    </>
-                    <p class="logmessage">登録がお済みで無い方はこちらから<br><a href="add_user.php">新規登録</a>して下さい。</p>
-                </div>
-            </form>
+
+            <legend>ログイン</legend>
+            <div id="form">
+                <p class="form-title">ログインページ</p>
+                <?php if (count($err) !== 0) : ?>
+                <?php foreach ($err as $e) : ?>
+                <p class="error" style="color:red;">・<?php echo h($e); ?></p>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <form action="" method="post">
+                    <p>メールアドレス</p>
+                    <p class="form-title">
+                    <p class="mail">
+                        <input id="email" name="email" type="text" />
+                    </p>
+                    <p>パスワード</p>
+                    <p class="form-title">
+                    <p class="pass">
+                        <input id="password" name="password" type="password" />
+                    </p>
+                    </p>
+                    <div class="center1">
+                        <p class="submit"><input type="submit" value="ログイン"></p>
+                        <p class="logmessage">登録がお済みで無い方はこちらから<br><a href="add_user.php">新規登録</a>して下さい。</p>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
 </body>
 
 </html>

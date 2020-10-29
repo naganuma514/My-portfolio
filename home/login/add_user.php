@@ -6,9 +6,14 @@ error_reporting(E_ALL);
 //セッションスタート。
 session_start();
 
+
 //DBとClassの読み込み。
 require 'database.php';
 require 'add_class.php';
+require 'session.php';
+
+$login_user=setSession($_SESSION['login_user']);
+loginCheck($login_user);
 
 $err = [];
 $register = new Register();
@@ -46,84 +51,88 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
 </head>
 
 <body id="top">
-    <div id="sidebar">
-        <div id="sidebarWrap">
-            <h2>chou chou <br>ゲスト様</h2>
-            <nav id="mainnav">
-                <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
-                <div class="panel">
-                    <ul>
-                        <li><a href="../index.php #top">トップ</a></li>
-                        <li><a href="../index.php #sec01">メッセージ</a></li>
-                        <li><a href="../index.php #sec03">スタッフ</a></li>
-                        <li><a href="../index.php #sec05">アクセス</a></li>
-                        <li><a href="">ログイン</a></li>
-                        <li><a href="">ご予約</a></li>
-                        <li><a href="">お問い合わせ</a></li>
-                    </ul>
-                    <ul id="sns">
-                        <li><a href="#" target="_blank"><img src="../images/iconFb.png" width="20" height="20"
-                                    alt="FB"></a></li>
-                        <li><a href="#" target="_blank"><img src="../images/iconTw.png" width="20" height="20"
-                                    alt="twitter"></a></li>
-                        <li><a href="#" target="_blank"><img src="../images/iconInsta.png" width="20" height="20"
-                                    alt="Instagram"></a></li>
-                        <li><a href="#" target="_blank"><img src="../images/iconYouTube.png" width="20" height="20"
-                                    alt="You Tube"></a></li>
-                    </ul>
-                </div>
-            </nav>
+    <div id="wrapper">
+        <div id="sidebar">
+            <div id="sidebarWrap">
+                <h1>chou chou <br>
+                <?php if (isset($login_user)) : ?>
+                <?php echo $login_user['user_name']; ?> 様</h1>
+                <?php endif;?>
+                    ゲスト様</h1>'
+                <nav id="mainnav">
+                    <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
+                    <div class="panel">
+                        <ul>
+                            <li><a href="../index.php #top">トップ</a></li>
+                            <li><a href="../index.php #sec01">メッセージ</a></li>
+                            <li><a href="../index.php #sec03">スタッフ</a></li>
+                            <li><a href="../index.php #sec05">アクセス</a></li>
+                            <li><a href="">ログイン</a></li>
+                            <li><a href="">ご予約</a></li>
+                            <li><a href="">お問い合わせ</a></li>
+                        </ul>
+                        <ul id="sns">
+                            <li><a href="#" target="_blank"><img src="../images/iconFb.png" width="20" height="20"
+                                        alt="FB"></a></li>
+                            <li><a href="#" target="_blank"><img src="../images/iconTw.png" width="20" height="20"
+                                        alt="twitter"></a></li>
+                            <li><a href="#" target="_blank"><img src="../images/iconInsta.png" width="20" height="20"
+                                        alt="Instagram"></a></li>
+                            <li><a href="#" target="_blank"><img src="../images/iconYouTube.png" width="20" height="20"
+                                        alt="You Tube"></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
         </div>
-    </div>
 
-    <div id="content">
-        <?php if (isset($success) && $success) : ?>
-        <div class="gologin">
-            <p>ありがとうございます。登録に成功しました。<br>ログインへお進みください。</p>
-            <p>
-                <button class="submit" onclick="location.href='login_user.php'">ログインページへ</button>
-            </p>
-        </div>
-        <?php else : ?>
-        <legend>新規アカウント登録フォーム</legend>
-        <div id="form">
-            <p class="form-title">新規会員登録ページ</p>
-            <?php if (count($err) !== 0) : ?>
-            <?php foreach ($err as $e) : ?>
-            <p class="error" style="color:red;">・<?php echo h($e); ?></p>
-            <?php endforeach; ?>
-            <?php endif; ?>
-            <form action="" method="post">
-                <p>名前</p>
-                <p class="form-title">
-                <p class="mail">
-                    <input id="user_name" name="user_name" type="text" autofocus>
+        <div id="content">
+            <?php if (isset($success) && $success) : ?>
+            <div class="gologin">
+                <p>ありがとうございます。登録に成功しました。<br>ログインへお進みください。</p>
+                <p>
+                    <button class="submit" onclick="location.href='login_user.php'">ログインページへ</button>
                 </p>
-                <p>メールアドレス</p>
-                <p class="form-title">
-                <p class="mail">
-                    <input id="email" name="email" type="text" />
-                </p>
-                <p>パスワード</p>
-                <p class="form-title">
-                <p class="pass">
-                    <input id="password" name="password" type="password" />
-                </p>
-                <p>確認用パスワード</p>
-                <p class="form-title">
-                <p class="pass">
-                    <input id="password_conf" name="password_conf" type="password" />
-                </p>
-                </p>
-                <div class="center">
-                    <p class="submit"><input type="submit" value="新規登録" /></p>
+            </div>
+            <?php else : ?>
+            <legend>新規アカウント登録フォーム</legend>
+            <div id="form">
+                <p class="form-title">新規会員登録ページ</p>
+                <?php if (count($err) !== 0) : ?>
+                <?php foreach ($err as $e) : ?>
+                <p class="error" style="color:red;">・<?php echo h($e); ?></p>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <form action="" method="post">
+                    <p>名前</p>
+                    <p class="form-title">
+                    <p class="mail">
+                        <input id="user_name" name="user_name" type="text" autofocus>
                     </p>
-                    <p class="logmessage">登録が完了している方はこちらから<br><a href="login_user.php">ログイン</a>して下さい。</p>
-                </div>
-            </form>
+                    <p>メールアドレス</p>
+                    <p class="form-title">
+                    <p class="mail">
+                        <input id="email" name="email" type="text" />
+                    </p>
+                    <p>パスワード</p>
+                    <p class="form-title">
+                    <p class="pass">
+                        <input id="password" name="password" type="password" />
+                    </p>
+                    <p>確認用パスワード</p>
+                    <p class="form-title">
+                    <p class="pass">
+                        <input id="password_conf" name="password_conf" type="password" />
+                    </p>
+                    </p>
+                    <div class="center">
+                        <p class="submit"><input type="submit" value="新規登録" /></p>
+                        <p class="logmessage">登録が完了している方はこちらから<br><a href="login_user.php">ログイン</a>して下さい。</p>
+                    </div>
+                </form>
+                <?php endif;?>
+            </div>
         </div>
-        <?php endif;?>
-
     </div>
 </body>
 
