@@ -7,33 +7,28 @@ if (isset($_GET['ym'])) {
     $ym = $_GET['ym'];
 } else{
    // 今月の年月を表示
-    $ym=date('Y-m-d 9:00:00');
+    $ym=date('Y-m-d');
 }
 // タイムスタンプを作成し、フォーマットをチェックする
 $timestamp = strtotime($ym);
 if ($timestamp === false) {
-    $ym = date('Y-m-d 9:00:00');
-    $timestamp = strtotime(('Y-m-d h:i:s'), $ym);
+    $ym = date('Y-m-d');
+    $timestamp = strtotime($ym);
 }
-echo $timestamp;
-echo date('Y-m-d h:i:s', $timestamp);
-$dt = new DateTime();
 // 今日の日付 フォーマット　例）2018-07-3
-$today = $dt->format('Y-m-d');
+$today = date('j',$timestamp);
 
 // カレンダーのタイトルを作成　例）2017年7月
 $html_title = date('n月d日', $timestamp);
 
 // 前月・次月の年月を取得
-$prev = date('Y-m-d 9:00:00');
-$next = date('Y-m-d 9:00:00', strtotime('+1 week', $timestamp));
+$prev = date('Y-m-d');
+$next = date('Y-m-d', strtotime('+1 week', $timestamp));
+$nextday=date('j', strtotime('+1 day', $timestamp));
 
 
 //曜日を取得
-$syuu = [
-    '日', '月', '火','水', '木', '金', '土',
-  ];
-$youbi = date('w', $timestamp);
+$syuu = ['日', '月', '火','水', '木', '金', '土',];
 
 
 
@@ -45,39 +40,17 @@ $week = '';
 // 第１週目：空のセルを追加
 // 例）１日が水曜日だった場合、日曜日から火曜日の３つ分の空セルを追加する
 
-for ( $day = 1; $day <= 1; $day++, $youbi++) {
+for ($i=$ym; $i<$next; $i = date('Y-m-d 9:00:00',strtotime($i . '+1 day'))) {
+    $today=date('j',strtotime($i));
+    $youbi=date('w',strtotime($i));
 
-    // 2017-07-3
-    $date = $ym . '-' . $day;
-    $daytime = strtotime($date);
-    $todaytime = strtotime($today);
-
-    if ($today == $date) {
-        // 今日の日付の場合は、class="today"をつける
-        $week .= '<td class="today">' . $day;
-    } elseif ($daytime > $todaytime) {
-            $week .= '<td>' . $day . "<a href='date_time.php?reservation=$date'>予定を追加</a>";
-        } 
-    else {
-        $week .= '<td>' . $day;
+    $week.="<table class='booking' border='1' align='left'> <tr><th> $today 日 <br> $syuu[$youbi] </th>";
+    for($a=1;$a<=22;$a++) {
+      $week.="<td>〇</td>";
     }
-    $week .= '</td>';
-
-    // 週終わり、または、月終わりの場合
-    if ($youbi % 7 == 6 ) {
-
-        if ($day == $day_count) {
-            // 月の最終日の場合、空セルを追加
-            // 例）最終日が木曜日の場合、金・土曜日の空セルを追加
-            $week .= str_repeat('<td></td>', 6 - ($youbi % 7));
-        }
-
-        // weeks配列にtrと$weekを追加する
-        $weeks[] = '<tr>' . $week . '</tr>';
-
-        // weekをリセット
-        $week = '';
-	}
+    $week.="</tr></table>";
+    $weeks[]=$week;
+    $week='';
 }
 ?>
 <!DOCTYPE html>
@@ -90,15 +63,15 @@ for ( $day = 1; $day <= 1; $day++, $youbi++) {
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
     <style>
-    td,
-    tr,
-    th {
-        display: block
+    .booking td,tr,th {
+        display: block;
+        width:100px;
+        height:60px;
+        text-align:center;
+        vertical-align:middle;
     }
 
-    .left {
-        align: right;
-    }
+    
     </style>
 </head>
 
@@ -107,33 +80,38 @@ for ( $day = 1; $day <= 1; $day++, $youbi++) {
         <h3><a href="?ym=<?php echo $prev; ?>">&lt;</a> <?php echo $html_title; ?> <a
                 href="?ym=<?php echo $next; ?>">&gt;</a></h3>
 
-        <table class="booking" border="1" align="left">
+        <table class='booking' border='1' align='left'>
             <tr>
-                <td>時間</td>
-                <td>9:00</td>
-                <td>9:30</td>
-                <td>10:00</td>
-                <td>10:30</td>
-                <td>11:00</td>
-                <td>11:30</td>
-                <td>12:00</td>
-                <td>12:30</td>
-                <td>13:00</td>
-                <td>13:30</td>
-                <td>14:00</td>
-                <td>14:30</td>
-                <td>15:00</td>
-                <td>15:30</td>
-                <td>16:00</td>
-                <td>16:30</td>
-                <td>17:00</td>
-                <td>17:30</td>
-                <td>18:00</td>
-                <td>18:30</td>
-                <td>19:00</td>
-                <td>19:30</td>
+                <th>時間</th>
+                <th>9:00</th>
+                <th>9:30</th>
+                <th>10:00</th>
+                <th>10:30</th>
+                <th>11:00</th>
+                <th>11:30</th>
+                <th>12:00</th>
+                <th>12:30</th>
+                <th>13:00</th>
+                <th>13:30</th>
+                <th>14:00</th>
+                <th>14:30</th>
+                <th>15:00</th>
+                <th>15:30</th>
+                <th>16:00</th>
+                <th>16:30</th>
+                <th>17:00</th>
+                <th>17:30</th>
+                <th>18:00</th>
+                <th>18:30</th>
+                <th>19:00</th>
+                <th>19:30</th>
             </tr>
         </table>
+        <?php
+                foreach ($weeks as $week) {
+                    echo $week;
+                }
+            ?>
 
 
 
