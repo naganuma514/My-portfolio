@@ -26,11 +26,11 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
         $pdo = connect();
 
         // ステートメント
-        $stmt = $pdo->prepare('INSERT INTO `USER` (`id`, `user_name`, `email`, `password`) VALUES (null, ?, ?, ?)');
+        $stmt = $pdo->prepare('INSERT INTO `USER` (`id`, `user_name`, `phone`,`email`,`password`) VALUES (null, ?, ?, ?, ?)');
 
         // パラメータ設定
         $pass_hash = password_hash($user->password, PASSWORD_DEFAULT);
-        $params = [0 => $user->user_name, 1 => $user->email, 2 => $pass_hash];
+        $params = [0 => $user->user_name, 1 => $user->phone, 2 => $user->email, 3 => $pass_hash];
 
         // SQL実行
         $success = $stmt->execute($params);
@@ -114,6 +114,11 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                     <p class="form-title">
                     <p class="mail">
                         <input id="email" name="email" type="text" />
+                    </p>
+                    <p>電話番号</p>
+                    <p class="form-title">
+                    <p class="phone">
+                        <input id="phone" name="phone" type="text" />
                     </p>
                     <p>パスワード</p>
                     <p class="form-title">

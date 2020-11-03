@@ -10,6 +10,7 @@ class Register
 
         $this->params = filter_input_array(INPUT_POST, [
             'user_name' => FILTER_DEFAULT,
+            'phone' => FILTER_DEFAULT,
             'email' => FILTER_DEFAULT,
             'password' => FILTER_DEFAULT,
             'password_conf' => FILTER_DEFAULT
@@ -23,6 +24,10 @@ class Register
 
         if ($this->params['email'] !== '' && $this->mailCheck($this->params['email'])) {
             $err[] = "メールアドレスの入力に誤りがあります";
+        }
+        
+        if ($this->params['phone'] !== '' && $this->phoneCheck($this->params['phone'])) {
+            $err[] = "電話番号の入力に誤りがあります";
         }
 
         $pass = $this->params['password'];
@@ -52,6 +57,9 @@ class Register
         } elseif ($value==='email') {
             $err = 'メールアドレスは入力必須です。';
             return $err;
+        } elseif ($value==='phone') {
+            $err = '電話番号は入力必須です。';
+            return $err;
         }elseif ($value==='password') {
             $err = 'パスワードは入力必須です。';
             return $err;
@@ -71,4 +79,15 @@ class Register
             return true;
         }
     }
+
+    private function phoneCheck($phone)
+    {
+        $reg_phone = '/^0[0-9]{9}$|^0[0-9]{10}$/i';
+        if (preg_match($reg_phone, $phone)) {
+            return  false;
+        } else {
+            return true;
+        }
+    }
 }
+
