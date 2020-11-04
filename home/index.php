@@ -37,7 +37,7 @@ if(isset($_SESSION["login_user"])) {
                             <li><a href="#sec03">スタッフ</a></li>
                             <li><a href="#sec05">アクセス</a></li>
                             <li><a href="login/add_user.php">ログイン</a></li>
-                            <li><a href="">ご予約</a></li>
+                            <li><a href="booking/booking.php">ご予約</a></li>
                             <li><a href="">お問い合わせ</a></li>
                         </ul>
                         <ul id="sns">

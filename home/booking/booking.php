@@ -7,12 +7,12 @@ if (isset($_GET['ym'])) {
     $ym = $_GET['ym'];
 } else{
    // 今月の年月を表示
-    $ym=date('Y-m-d');
+    $ym=date('Y-m-d 09:00:00');
 }
 // タイムスタンプを作成し、フォーマットをチェックする
 $timestamp = strtotime($ym);
 if ($timestamp === false) {
-    $ym = date('Y-m-d');
+    $ym = date('Y-m-d 09:00:00');
     $timestamp = strtotime($ym);
 }
 // 今日の日付 フォーマット　例）2018-07-3
@@ -22,14 +22,13 @@ $today = date('j',$timestamp);
 $html_title = date('n月d日', $timestamp);
 
 // 前月・次月の年月を取得
-$prev = date('Y-m-d');
-$next = date('Y-m-d', strtotime('+1 week', $timestamp));
+$prev = date('Y-m-d 09:00:00');
+$next = date('Y-m-d 09:00:00', strtotime('+1 week', $timestamp));
 $nextday=date('j', strtotime('+1 day', $timestamp));
 
 
 //曜日を取得
 $syuu = ['日', '月', '火','水', '木', '金', '土',];
-
 
 
 
@@ -40,17 +39,23 @@ $week = '';
 // 第１週目：空のセルを追加
 // 例）１日が水曜日だった場合、日曜日から火曜日の３つ分の空セルを追加する
 
-for ($i=$ym; $i<$next; $i = date('Y-m-d 9:00:00',strtotime($i . '+1 day'))) {
+for ($i=$ym; $i<$next; $i = date('Y-m-d 09:00:00',strtotime($i . '+1 day'))) {
     $today=date('j',strtotime($i));
     $youbi=date('w',strtotime($i));
-
-    $week.="<table class='booking' border='1' align='left'> <tr><th> $today 日 <br> $syuu[$youbi] </th>";
-    for($a=1;$a<=22;$a++) {
-      $week.="<td>〇</td>";
+    $week.="<table class='booking' border='1' align='left'> <tr><td> $today <br> $syuu[$youbi] </td>";
+    
+    for($abc=1; $abc<=22 ; $abc++) {
+        if(empty($booktime)) {
+            $booktime=$i;
+        }
+        
+        $week.="<td> $booktime </td>";
+        $booktime=date('Y-m-d H:i:s',strtotime($booktime.'+30 minutes'));
     }
     $week.="</tr></table>";
     $weeks[]=$week;
     $week='';
+    $booktime='';
 }
 ?>
 <!DOCTYPE html>
