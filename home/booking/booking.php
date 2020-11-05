@@ -1,28 +1,29 @@
 <?php
 // タイムゾーンを設定
 date_default_timezone_set('Asia/Tokyo');
+require 'database.php';
 
 // 前月・次月リンクが押された場合は、GETパラメーターから年月を取得
 if (isset($_GET['ym'])) {
     $ym = $_GET['ym'];
 } else{
    // 今月の年月を表示
-    $ym=date('Y-m-d 09:00:00');
+    $ym=date('Y-m-d 09:00:00',strtotime('+1 day'));
 }
 // タイムスタンプを作成し、フォーマットをチェックする
 $timestamp = strtotime($ym);
 if ($timestamp === false) {
-    $ym = date('Y-m-d 09:00:00');
+    $ym = date('Y-m-d 09:00:00',strtotime('+1 day'));
     $timestamp = strtotime($ym);
 }
 // 今日の日付 フォーマット　例）2018-07-3
-$today = date('j',$timestamp);
+
 
 // カレンダーのタイトルを作成　例）2017年7月
 $html_title = date('n月d日', $timestamp);
 
 // 前月・次月の年月を取得
-$prev = date('Y-m-d 09:00:00');
+$prev = date('Y-m-d 09:00:00',strtotime('+1 day'));
 $next = date('Y-m-d 09:00:00', strtotime('+1 week', $timestamp));
 $nextday=date('j', strtotime('+1 day', $timestamp));
 
@@ -48,9 +49,37 @@ for ($i=$ym; $i<$next; $i = date('Y-m-d 09:00:00',strtotime($i . '+1 day'))) {
         if(empty($booktime)) {
             $booktime=$i;
         }
+        $bbotimes=[];
+        $booktimes=[
+            date('Y-m-d H:i:s',strtotime($booktime.'-1 hours')),
+            date('Y-m-d H:i:s',strtotime($booktime.'-30 minutes')),
+            $booktime,
+            date('Y-m-d H:i:s',strtotime($booktime.'+30 minutes')),
+            date('Y-m-d H:i:s',strtotime($booktime.'+1 hours'))
+        ];
         
-        $week.="<td> $booktime </td>";
+        $pdo = connect();
+
+        $stmt = $pdo->prepare("SELECT * FROM reser where datetime = ? or datetime = ? or datetime = ? or datetime = ? or datetime = ?");
+        // ステートメント
+        $stmt->bindValue(1,$booktimes[0]);
+        $stmt->bindValue(2,$booktimes[1]);
+        $stmt->bindValue(3,$booktimes[2]);
+        $stmt->bindValue(4,$booktimes[3]);
+        $stmt->bindValue(5,$booktimes[4]);
+        
+        // パラメータ設定
+        $stmt->execute();
+
+        $all = $stmt->fetchAll();
+
+         if(empty($all)) {
+            $week.='<td>'. "<a href='booking_time.php?booktime=$booktime'>◎</a>" .'</td>';
+        }else{
+             $week.="<td> ✖ </td>";
+         }
         $booktime=date('Y-m-d H:i:s',strtotime($booktime.'+30 minutes'));
+
     }
     $week.="</tr></table>";
     $weeks[]=$week;
@@ -70,10 +99,11 @@ for ($i=$ym; $i<$next; $i = date('Y-m-d 09:00:00',strtotime($i . '+1 day'))) {
     <style>
     .booking td,tr,th {
         display: block;
-        width:100px;
-        height:60px;
+        width:70px;
+        height:55px;
         text-align:center;
         vertical-align:middle;
+        font-size:20px;
     }
 
     

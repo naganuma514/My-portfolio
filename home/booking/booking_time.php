@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+
+require 'database.php';
+require 'session.php';
+
+if (!isset($_SESSION['login_user'])) {
+    backUser();
+}else{
+    $login_user=$_SESSION['login_user'];
+}
+
+if(isset($_GET['booktime'])) {
+$booktime=$_GET['booktime'];
+}
+?>
 <!doctype html>
 <html lang="ja">
 
@@ -48,9 +65,17 @@
             </div>
         </div>
 
+<form action="check.php" method="post">
+<input type="hidden" name="booktime" value=$booktime>
+<input type="radio" name="course" value="フィットカラー">フィットカラー<br>
+<input type="radio" name="course" value="フェイシァルトリートメント ハーバルラグジュアリーコース">フェイシァルトリートメント ハーバルラグジュアリーコース<br>
+<input type="radio" name="course" value="メイクレッスン">メイクレッスン<br>
+<input type="radio" name="course" value="メンバーさんの毎月のフォローフェイシァル">メンバーさんの毎月のフォローフェイシァル<br>
+<input type="radio" name="course" value="フェイシｧル体験 30分コース">フェイシｧル体験 30分コース<br>   
+      <input type="submit" name="submit" value="送信" />
 
+</form>
     
     </div>
 </body>
-
 </html>

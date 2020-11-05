@@ -69,7 +69,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                             <li><a href="../index.php #sec03">スタッフ</a></li>
                             <li><a href="../index.php #sec05">アクセス</a></li>
                             <li><a href="">ログイン</a></li>
-                            <li><a href="">ご予約</a></li>
+                            <li><a href="../booking/booking.php">ご予約</a></li>
                             <li><a href="">お問い合わせ</a></li>
                         </ul>
                         <ul id="sns">
