@@ -64,7 +64,7 @@ class Booking {
             $today=date('j',strtotime($i));
             $youbi=date('w',strtotime($i));
             //日付曜日セル作成
-            $week.="<table class='booking' border='1' align='left'> <tr><td> $today <br> $syuu[$youbi] </td>";
+            $week.="<table class='booking' border='1' align='left'> <tr><th> $today <br> $syuu[$youbi] </th>";
             //22回ループ、データベースにその時間、またその前後１時間に予約があるか検索
             for($abc=1; $abc<=22 ; $abc++) {
                      if(empty($booktime)) {
