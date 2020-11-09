@@ -93,9 +93,9 @@ class Booking {
                     
                     //データベースに値があったかチェック
                     if(empty($all)) {
-                        $week.='<td>'. "<a href='booking_time.php?booktime=$booktime'>◎</a>" .'</td>';
+                        $week.='<td>'. "<a href='booking_time.php?booktime=$booktime'> ◎ </a>" .'</td>';
                     }else{
-                        $week.="<td>✖</td>";
+                        $week.="<td> ✖ /td>";
                     }
                     //３０分足してもう一度ループ
                     $booktime=date('Y-m-d H:i:s',strtotime($booktime.'+30 minutes'));

@@ -5,10 +5,8 @@ session_start();
 require 'database.php';
 require 'session.php';
 
-if (!isset($_SESSION['login_user'])) {
-    backUser();
-}else{
-    $login_user=$_SESSION['login_user'];
+if (isset($_SESSION['login_user'])) {
+   $login_user=$_SESSION['login_user'];
 }
 
 if(isset($_GET['booktime'])) {
@@ -64,14 +62,30 @@ $booktime=$_GET['booktime'];
                 </nav>
             </div>
         </div>
+        <?php if (!isset($_SESSION['login_user'])) {
+    backUser();
+}
+?>
+        
         <div class="gologin">
+        <h1>コースを選択してください</h1>
+                    
             <form action="check.php" method="post">
                 <input type="hidden" name="booktime" value=$booktime>
 
-
+                <div class="float" align='center'>
                 <input id="fitcolor" type="radio" name="course" value="フィットカラー">フィットカラー<br>
                 <label for="fitcolor"><img id="fitcolor" src="../images/fitcolor.jpg" width="150" height="150"
                         alt=""><br></label>
+                       <p> こんにちはこんにちはこんにちはこんにちはこんにちはこんにちはこんにちはこんにちは
+                        こんにちはこんにちはこんにちはこんにちはこんにちはこんにちはこんにちはこんにちは
+                        こんにちはこんにちはこんにちはこんにちはこんにちはこんにちはこんにちはこんにちは</p>
+                </div>
+                <div class="float" align='center'>
+                <input id="fitcolor" type="radio" name="course" value="フィットカラー">フィットカラー<br>
+                <label for="fitcolor"><img id="fitcolor" src="../images/fitcolor.jpg" width="150" height="150"
+                        alt=""><br></label>
+                </div>
 
                 <input type="radio" name="course" value="フェイシァルトリートメント ハーバルラグジュアリーコース">フェイシァルトリートメント ハーバルラグジュアリーコース<br>
                 <input type="radio" name="course" value="メイクレッスン">メイクレッスン<br>
@@ -79,10 +93,12 @@ $booktime=$_GET['booktime'];
                 <input type="radio" name="course" value="フェイシｧル体験 30分コース">フェイシｧル体験 30分コース<br>
 
                 <div class="center">
-                <br><p class="submit"><input type="submit" value="予約する" /></p>　<br>
+                    <br>
+                    <p class="submit"><input type="submit" value="予約する" /></p>　<br>
                     <button type="button" onclick="history.back()">戻る</button>
                 </div>
-
+                </tr>
+                </table>
             </form>
         </div>
     </div>
