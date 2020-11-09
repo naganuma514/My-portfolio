@@ -1,5 +1,10 @@
 <?php
 // タイムゾーンを設定
+session_start();
+if(isset($_SESSION["login_user"])) {
+    $login_user=$_SESSION["login_user"];
+}
+
 require 'database.php';
 require 'booking_class.php';
 date_default_timezone_set('Asia/Tokyo');
@@ -67,8 +72,10 @@ $next = $book->afterWeek();
             </div>
         </div>
         <div id="content">
-            <h1><a href="?ym=<?php echo $prev; ?>">&lt;</a> <?php $book->getHtmltitle(); ?> <a
-                    href="?ym=<?php echo $next; ?>">&gt;</a></h1>
+            <h1>予約フォーム</h1>
+            <p>ご希望の日時を選択してください。</p>
+            <h3><a href="?ym=<?php echo $prev; ?>">&lt;</a> <?php $book->getHtmltitle(); ?> <a
+                    href="?ym=<?php echo $next; ?>">&gt;</a></h3>
             <div class="booklist">
                 <table class='bookingtable' style=”height: 448px;” width=”742″>
                     <table class='booking' border='1' align='left'>

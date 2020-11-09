@@ -64,18 +64,28 @@ $booktime=$_GET['booktime'];
                 </nav>
             </div>
         </div>
+        <div class="gologin">
+            <form action="check.php" method="post">
+                <input type="hidden" name="booktime" value=$booktime>
 
-<form action="check.php" method="post">
-<input type="hidden" name="booktime" value=$booktime>
-<input type="radio" name="course" value="フィットカラー">フィットカラー<br>
-<input type="radio" name="course" value="フェイシァルトリートメント ハーバルラグジュアリーコース">フェイシァルトリートメント ハーバルラグジュアリーコース<br>
-<input type="radio" name="course" value="メイクレッスン">メイクレッスン<br>
-<input type="radio" name="course" value="メンバーさんの毎月のフォローフェイシァル">メンバーさんの毎月のフォローフェイシァル<br>
-<input type="radio" name="course" value="フェイシｧル体験 30分コース">フェイシｧル体験 30分コース<br>   
-      <input type="submit" name="submit" value="送信" />
 
-</form>
-    
+                <input id="fitcolor" type="radio" name="course" value="フィットカラー">フィットカラー<br>
+                <label for="fitcolor"><img id="fitcolor" src="../images/fitcolor.jpg" width="150" height="150"
+                        alt=""><br></label>
+
+                <input type="radio" name="course" value="フェイシァルトリートメント ハーバルラグジュアリーコース">フェイシァルトリートメント ハーバルラグジュアリーコース<br>
+                <input type="radio" name="course" value="メイクレッスン">メイクレッスン<br>
+                <input type="radio" name="course" value="メンバーさんの毎月のフォローフェイシァル">メンバーさんの毎月のフォローフェイシァル<br>
+                <input type="radio" name="course" value="フェイシｧル体験 30分コース">フェイシｧル体験 30分コース<br>
+
+                <div class="center">
+                <br><p class="submit"><input type="submit" value="予約する" /></p>　<br>
+                    <button type="button" onclick="history.back()">戻る</button>
+                </div>
+
+            </form>
+        </div>
     </div>
 </body>
+
 </html>

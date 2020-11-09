@@ -39,12 +39,11 @@ a:active, a:focus,input:active, input:focus{outline:0;}
 /* 共通
 ------------------------------------------------------------*/
 h1{
-    
-    font-size:25px;
+    font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
 }
 h2{
-	font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
 	position: center;
+	font-size:25px;
 }
 section{
   clear: both;
@@ -57,7 +56,6 @@ body,p,form,input{margin: 0}
   padding: 65px 50px 50px 50px;
   border: 1px solid #555;
   }
-
 form p{
     font-size: 14px;
     }
@@ -143,8 +141,7 @@ input[type="text"]
 
 }
  .gologin{
-	position: relative; top: 150px;
-    text-align: center;
+	
    }
    #form .logmessage{
 	   color: black;
@@ -159,7 +156,7 @@ input[type="text"]
    .booklist{
     text-align:center;
    }
-   .booking td,tr,th {
+   .booking tr,th {
     display: block;
     width: 80px;
     height: 80px;
@@ -167,6 +164,7 @@ input[type="text"]
     font-size:20px; 
 
 }
+
 
 /* RESPONSIVE 設定
 ------------------------------------------------------------*/
