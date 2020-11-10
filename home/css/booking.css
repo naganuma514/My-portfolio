@@ -39,11 +39,12 @@ a:active, a:focus,input:active, input:focus{outline:0;}
 /* 共通
 ------------------------------------------------------------*/
 h1{
-    font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
-}
-h2{
+	font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
 	position: center;
 	font-size:25px;
+}
+h2{
+	font-family: 'Modern Antiqua', 'Noto Sans JP',serif;
 }
 section{
   clear: both;
@@ -141,7 +142,7 @@ input[type="text"]
 
 }
  .gologin{
-	position: relative; top:100px;
+	position: relative; top:50px;
 	text-align: center;
 	
    }
@@ -149,7 +150,7 @@ input[type="text"]
 	   color: black;
    }
    #content{
-       padding-top:60px;
+       padding-top:30px;
        margin:0 auto;
    }
    .bookingtable{
@@ -158,13 +159,12 @@ input[type="text"]
    .booklist{
     text-align:center;
    }
-   .booking tr,th {
+   .booking td,tr,th {
     display: block;
     width: 80px;
     height: 80px;
     text-align:center;
     font-size:20px; 
-
 }
 
 

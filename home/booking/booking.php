@@ -65,7 +65,7 @@ $next = $book->afterWeek();
                             <li><a href="#" target="_blank"><img src="../images/iconInsta.png" width="20" height="20"
                                         alt="Instagram"></a></li>
                             <li><a href="#" target="_blank"><img src="../images/iconYouTube.png" width="20" height="20"
-                                        alt="You Tube"></a></li>
+                                        alt="YouTube"></a></li>
                         </ul>
                     </div>
                 </nav>
@@ -74,13 +74,15 @@ $next = $book->afterWeek();
         <div id="content">
             <h1>予約フォーム</h1>
             <p>ご希望の日時を選択してください。</p>
-            <h3><a href="?ym=<?php echo $prev; ?>">&lt;</a> <?php $book->getHtmltitle(); ?> <a
-                    href="?ym=<?php echo $next; ?>">&gt;</a></h3>
+            <h3><a href="?ym=<?php echo $prev; ?>">&lt;</a>
+                <?php $book->getHtmltitle(); ?>
+                <a href="?ym=<?php echo $next; ?>">&gt;</a>
+            </h3>
             <div class="booklist">
                 <table class='bookingtable' style=”height: 448px;” width=”742″>
                     <table class='booking' border='1' align='left'>
                         <tr>
-                            <th>時間</th>
+                            <th>予約</th>
                             <th>9:00</th>
                             <th>9:30</th>
                             <th>10:00</th>

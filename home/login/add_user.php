@@ -99,6 +99,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             <legend>新規アカウント登録フォーム</legend>
             <div id="form">
                 <p class="form-title">新規会員登録ページ</p>
+                <p style="text-align:center">登録が完了している方は<a href="login_user.php">こちらから<br>ログイン</a>して下さい。</p>
                 <?php if (count($err) !== 0) : ?>
                 <?php foreach ($err as $e) : ?>
                 <p class="error" style="color:red;">・<?php echo h($e); ?></p>
@@ -133,7 +134,6 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                     </p>
                     <div class="center">
                         <p class="submit"><input type="submit" value="新規登録" /></p>
-                        <p class="logmessage">登録が完了している方はこちらから<br><a href="login_user.php">ログイン</a>して下さい。</p>
                     </div>
                 </form>
                 <?php endif;?>
