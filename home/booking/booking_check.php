@@ -1,26 +1,45 @@
 <?php
-// タイムゾーンを設定
+
+ini_set('display_errors', true);
+error_reporting(E_ALL);
+
+//セッションスタート。
 session_start();
-if(isset($_SESSION["login_user"])) {
-    $login_user=$_SESSION["login_user"];
+
+
+//DBとClassの読み込み。
+require 'database.php';
+require 'bookcheck_class.php';
+require 'session.php';
+if (!isset($_SESSION['login_user'])) {
+    backUser();
+}
+if (isset($_SESSION["login_user"])) {
+    $login_user=setSession($_SESSION['login_user']);
+}
+if(!isset($_POST['course'])) {
+    course();
+}
+if ($_POST['booktime'] !== date("Y-m-d H:i:s", strtotime($_POST['booktime']))) {
+    booktimes();
 }
 
-require 'database.php';
-require 'booking_class.php';
-date_default_timezone_set('Asia/Tokyo');
+$err = [];
+$register = new Register();
+if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
+    $err = $register->Validation();
+    $user = $register->getUserInfo();
 
-// 前月・次月リンクが押された場合は、GETパラメーターから年月を取得
-$book=new Booking;
+    if (count($err) === 0) {
+        
+        // DB接続
+        $pdo = connect();
 
-//タイムスタンプをセット
-$book->makeStamp();
+        // ステートメント
+        $success=insertbook($pdo,$user->user_name, $user->phone,$user->email,$user->course,$user->booktime);
 
-//〇✖予約表を配列にして作成
-$weeks=$book->weeks();
-
-//GETで日にちを操作するための変数
-$prev = date('Y-m-d 09:00:00',strtotime('+1 day'));
-$next = $book->afterWeek();
+    }
+}
 ?>
 <!doctype html>
 <html lang="ja">
@@ -30,7 +49,7 @@ $next = $book->afterWeek();
     <meta name="description" content="最新技術と自然との調和を目指す">
     <meta name="viewport" content="width=device-width">
     <title>Home | NOEVIER beaty studio chou chou </title>
-    <link rel="stylesheet" media="all" href="../css/booking.css?20180928">
+    <link rel="stylesheet" media="all" href="../css/booking.css?20180926">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="../js/script.js"></script>
 </head>
@@ -71,48 +90,26 @@ $next = $book->afterWeek();
                 </nav>
             </div>
         </div>
+
+
         <div id="content">
-            <h1>予約フォーム</h1>
-            <p>ご希望の日時を選択してください。</p>
-            <h3><a href="?ym=<?php echo $prev; ?>">&lt;</a>
-                <?php $book->getHtmltitle(); ?>
-                <a href="?ym=<?php echo $next; ?>">&gt;</a>
-            </h3>
-            <div class="booklist">
-                <table class='bookingtable' style=”height: 448px;” width=”742″>
-                    <table class='booking' border='1' align='left'>
-                        <tr>
-                            <th>予約</th>
-                            <th>9:00</th>
-                            <th>9:30</th>
-                            <th>10:00</th>
-                            <th>10:30</th>
-                            <th>11:00</th>
-                            <th>11:30</th>
-                            <th>12:00</th>
-                            <th>12:30</th>
-                            <th>13:00</th>
-                            <th>13:30</th>
-                            <th>14:00</th>
-                            <th>14:30</th>
-                            <th>15:00</th>
-                            <th>15:30</th>
-                            <th>16:00</th>
-                            <th>16:30</th>
-                            <th>17:00</th>
-                            <th>17:30</th>
-                            <th>18:00</th>
-                            <th>18:30</th>
-                            <th>19:00</th>
-                            <th>19:30</th>
-                        </tr>
-                    </table>
-                    <?php
-                foreach ($weeks as $week) {
-                    echo $week;
-                }
-            ?>
-                </table>
+            <div class="gologin">
+                <?php if (count($err) !== 0) : ?>
+                <?php foreach ($err as $er) : ?>
+                <?php echo $er; ?>
+                <?php endforeach; ?>
+                <?php elseif (isset($success)) : ?>
+                <h1>予約が完了しました。</h1>
+                <p><?php echo $user->user_name; ?>様</p>
+                <p><?php echo $user->booktime; ?></p>
+                <button class='submit' onclick="location.href='../index.php'">ホームに戻る</button>
+                <?php else  : ?>
+                <h1>予約に失敗しました。<br>
+                    もう一度日時を選択してください。</h1>
+                <button class='submit' onclick="location.href='booking_time.php'">ホームに戻る</button>
+                <?php endif; ?>
+
+
             </div>
         </div>
     </div>

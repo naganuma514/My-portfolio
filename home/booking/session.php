@@ -33,5 +33,28 @@ function backUser() {
             </div>";
             exit;
     }
-
+function course() {
+    echo "
+    <div class='gologin'>
+    <h2　style='text-align:center; fomt-size:100px;'>
+                <p>コースが未選択です<br></p>
+                <p>
+                    <button class='submit' onclick="."location.href="."'booking_time.php'>コースを選択する</button>
+                </p>
+            </h2>
+            </div>";
+            exit;
+}
+function booktimes() {
+    echo "
+    <div class='gologin'>
+    <h2　style='text-align:center; fomt-size:100px;'>
+                <p>希望時刻が未選択です<br></p>
+                <p>
+                    <button class='submit' onclick="."location.href="."'booking_time.php'>希望日時を選択する</button>
+                </p>
+            </h2>
+            </div>";
+            exit;
+}
 ?>

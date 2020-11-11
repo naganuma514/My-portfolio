@@ -11,6 +11,9 @@ if (isset($_SESSION['login_user'])) {
 
 if(isset($_GET['booktime'])) {
 $booktime=$_GET['booktime'];
+}else{
+header('Location: booking.php');
+exit;
 }
 ?>
 <!doctype html>
@@ -21,7 +24,7 @@ $booktime=$_GET['booktime'];
     <meta name="description" content="最新技術と自然との調和を目指す">
     <meta name="viewport" content="width=device-width">
     <title>Home | NOEVIER beaty studio chou chou </title>
-    <link rel="stylesheet" media="all" href="../css/booking.css">
+    <link rel="stylesheet" media="all" href="../css/booking.css?20180925">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="../js/script.js"></script>
 </head>
@@ -62,16 +65,17 @@ $booktime=$_GET['booktime'];
                 </nav>
             </div>
         </div>
-        <?php if (!isset($_SESSION['login_user'])) {
-        backUser();
-         }
-         ?>
-
         <div id="content">
             <div class="gologin">
                 <h1>コースを選択してください</h1>
+                
                 <form action="booking_check.php" method="post">
-                    <input type="hidden" name="booktime" value=$booktime>
+                <?php if (isset($login_user)) : ?>
+                    <input type="hidden" name="user_name" value="<?php echo $login_user['user_name']; ?>">
+                    <input type="hidden" name="phone" value="<?php echo $login_user['phone']; ?>">
+                    <input type="hidden" name="email" value="<?php echo $login_user['email']; ?>">
+                    <input type="hidden" name="booktime" value="<?php echo $booktime; ?>">
+                    <?php endif; ?>
 
                     <div class="float" align='center'>
                         <input id="fitcolor" type="radio" name="course" value="フィットカラー">
@@ -123,8 +127,8 @@ $booktime=$_GET['booktime'];
                         <input id="facetaiken" type="radio" name="course" value="フェイシｧル体験 30分コース">
                         フェイシｧル体験 30分コース<br>30分
                         ￥2,200（税込）<br>
-                        <label for="facetaiken"><img id="facetaiken" src="../images/fitcolor.jpg" width="150"
-                                height="150" alt=""><br></label>
+                        <label for="facetaiken"><img id="facetaiken" src="../images/face.jpg" width="150" height="150"
+                                alt=""><br></label>
                         <p> ハーバルスキンケアシリーズ、エクストラ、505シリーズを使用した、<br>
                             オールハンドのじっくりていねいなクレンジング。<br>
                             ○通常2200円のコースを、初めての方1回限り500円税込でご体験頂けます。</p>
@@ -132,11 +136,9 @@ $booktime=$_GET['booktime'];
                     <br><br>
                     <div class="center">
                         <br>
-                        <p class="submit"><input type="submit" value="予約確認へ進む" /></p>　<br>
+                        <p class="submit"><input type="submit" value="予約を確定する" /></p>　<br>
                         <button type="button" onclick="history.back()">日付を選び直す</button>
                     </div>
-                    </tr>
-                    </table>
                 </form>
             </div>
         </div>
