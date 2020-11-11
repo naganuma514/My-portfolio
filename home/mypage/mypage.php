@@ -1,26 +1,24 @@
 <?php
-// タイムゾーンを設定
+
+ini_set('display_errors', true);
+error_reporting(E_ALL);
+
+//セッションスタート。
 session_start();
-if(isset($_SESSION["login_user"])) {
-    $login_user=$_SESSION["login_user"];
+
+
+//DBとClassの読み込み。
+require 'session.php';
+if (!empty($_GET['btn_logout'])) {
+    unsetlog();
+}
+if (!isset($_SESSION["login_user"])) {
+    backUser($_SESSION["login_user"]);
+}
+if (isset($_SESSION["login_user"])) {
+    $login_user=setSession($_SESSION['login_user']);
 }
 
-require 'database.php';
-require 'booking_class.php';
-date_default_timezone_set('Asia/Tokyo');
-
-// 前月・次月リンクが押された場合は、GETパラメーターから年月を取得
-$book=new Booking;
-
-//タイムスタンプをセット
-$book->makeStamp();
-
-//〇✖予約表を配列にして作成
-$weeks=$book->weeks();
-
-//GETで日にちを操作するための変数
-$prev = date('Y-m-d 09:00:00',strtotime('+1 day'));
-$next = $book->afterWeek();
 ?>
 <!doctype html>
 <html lang="ja">
@@ -30,7 +28,7 @@ $next = $book->afterWeek();
     <meta name="description" content="最新技術と自然との調和を目指す">
     <meta name="viewport" content="width=device-width">
     <title>Home | NOEVIER beaty studio chou chou </title>
-    <link rel="stylesheet" media="all" href="../css/booking.css?20180928">
+    <link rel="stylesheet" media="all" href="../css/login.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="../js/script.js"></script>
 </head>
@@ -69,54 +67,22 @@ $next = $book->afterWeek();
                             <li><a href="#" target="_blank"><img src="../images/iconInsta.png" width="20" height="20"
                                         alt="Instagram"></a></li>
                             <li><a href="#" target="_blank"><img src="../images/iconYouTube.png" width="20" height="20"
-                                        alt="YouTube"></a></li>
+                                        alt="You Tube"></a></li>
                         </ul>
                     </div>
                 </nav>
             </div>
+            　　
         </div>
-        <div id="content">
-            <h1>予約フォーム</h1>
-            <p>ご希望の日時を選択してください。</p>
-            <h3><a href="?ym=<?php echo $prev; ?>">&lt;</a>
-                <?php $book->getHtmltitle(); ?>
-                <a href="?ym=<?php echo $next; ?>">&gt;</a>
-            </h3>
-            <div class="booklist">
-                <table class='bookingtable' style=”height: 448px;” width=”742″>
-                    <table class='booking' border='1' align='left'>
-                        <tr>
-                            <th>予約</th>
-                            <th>9:00</th>
-                            <th>9:30</th>
-                            <th>10:00</th>
-                            <th>10:30</th>
-                            <th>11:00</th>
-                            <th>11:30</th>
-                            <th>12:00</th>
-                            <th>12:30</th>
-                            <th>13:00</th>
-                            <th>13:30</th>
-                            <th>14:00</th>
-                            <th>14:30</th>
-                            <th>15:00</th>
-                            <th>15:30</th>
-                            <th>16:00</th>
-                            <th>16:30</th>
-                            <th>17:00</th>
-                            <th>17:30</th>
-                            <th>18:00</th>
-                            <th>18:30</th>
-                            <th>19:00</th>
-                            <th>19:30</th>
-                        </tr>
-                    </table>
-                    <?php
-                foreach ($weeks as $week) {
-                    echo $week;
-                }
-            ?>
-                </table>
+        　<div id="content">
+            <div class="gologin">
+            <h1><?php echo $login_user['user_name'];?>様のマイページ</h1><br>
+                <form method="get" action="">
+                <p class="submit"><input type="submit" name="btn_logout" value="ログアウトする" /></p>
+                </form>
+                <br><br>
+                <button class="submit" onclick="location.href='look_book.php'">予約を確認する</button>
+                
             </div>
         </div>
     </div>

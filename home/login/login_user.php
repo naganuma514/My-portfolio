@@ -23,17 +23,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     if (count($err) === 0) {
         // DB接続
         $pdo = connect();
-
-        // SQL、パラメータ定義
-        $stmt = $pdo->prepare('SELECT * FROM USER WHERE email = ?');
-        
-        $params = [];
-        $params[] = $user->email;
-
-        $stmt->execute($params);
-
-        $rows = $stmt->fetchAll();
-        
+        $rows = loginuser($pdo,$user->email);
         // パスワード検証
         foreach ($rows as $row) {
             $password_hash = $row['password'];
@@ -83,7 +73,11 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                             <li><a href="../index.php #sec01">メッセージ</a></li>
                             <li><a href="../index.php #sec03">スタッフ</a></li>
                             <li><a href="../index.php #sec05">アクセス</a></li>
-                            <li><a href="">ログイン</a></li>
+                            <?php if (isset($login_user)) : ?>
+                            <li><a href="../mypage/mypage.php">マイページ</a></li>
+                            <?php else : ?>
+                            <li><a href="../login/add_user.php">ログイン</a></li>
+                            <?php endif;?>
                             <li><a href="../booking/booking.php">ご予約</a></li>
                             <li><a href="">お問い合わせ</a></li>
                         </ul>

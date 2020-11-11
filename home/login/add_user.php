@@ -24,16 +24,8 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     if (count($err) === 0) {
         // DB接続
         $pdo = connect();
-
-        // ステートメント
-        $stmt = $pdo->prepare('INSERT INTO `USER` (`id`, `user_name`, `phone`,`email`,`password`) VALUES (null, ?, ?, ?, ?)');
-
-        // パラメータ設定
-        $pass_hash = password_hash($user->password, PASSWORD_DEFAULT);
-        $params = [0 => $user->user_name, 1 => $user->phone, 2 => $user->email, 3 => $pass_hash];
-
         // SQL実行
-        $success = $stmt->execute($params);
+        $success = adduser($pdo,$user->password, $user->user_name,$user->phone,$user->email,);
     }
 }
 ?>
@@ -68,7 +60,11 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                             <li><a href="../index.php #sec01">メッセージ</a></li>
                             <li><a href="../index.php #sec03">スタッフ</a></li>
                             <li><a href="../index.php #sec05">アクセス</a></li>
-                            <li><a href="">ログイン</a></li>
+                            <?php if (isset($login_user)) : ?>
+                            <li><a href="../mypage/mypage.php">マイページ</a></li>
+                            <?php else : ?>
+                            <li><a href="../login/add_user.php">ログイン</a></li>
+                            <?php endif;?>
                             <li><a href="../booking/booking.php">ご予約</a></li>
                             <li><a href="">お問い合わせ</a></li>
                         </ul>

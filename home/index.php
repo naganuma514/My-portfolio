@@ -22,11 +22,11 @@ if(isset($_SESSION["login_user"])) {
     <div id="wrapper">
         <div id="sidebar">
             <div id="sidebarWrap">
-            <h1>chou chou <br>
-                <?php if (isset($login_user)) : ?>
-                <?php echo $login_user['user_name'];?>様</h1> 
+                <h1>chou chou <br>
+                    <?php if (isset($login_user)) : ?>
+                    <?php echo $login_user['user_name'];?>様</h1>
                 <?php else : ?>
-                    ゲスト様</h1>
+                ゲスト様</h1>
                 <?php endif;?>
                 <nav id="mainnav">
                     <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
@@ -36,7 +36,11 @@ if(isset($_SESSION["login_user"])) {
                             <li><a href="#sec01">メッセージ</a></li>
                             <li><a href="#sec03">スタッフ</a></li>
                             <li><a href="#sec05">アクセス</a></li>
+                            <?php if (isset($login_user)) : ?>
+                            <li><a href="mypage/mypage.php">マイページ</a></li>
+                            <?php else : ?>
                             <li><a href="login/add_user.php">ログイン</a></li>
+                            <?php endif;?>
                             <li><a href="booking/booking.php">ご予約</a></li>
                             <li><a href="">お問い合わせ</a></li>
                         </ul>
@@ -165,15 +169,8 @@ if(isset($_SESSION["login_user"])) {
                 </div>
             </section>
             <!-- // COMPANY -->
-
-            <footer id="footer">
-                Copyright(c) 2016 Sample Inc. All Rights Reserved. Design by <a href="http://f-tpl.com"
-                    target="_blank">http://f-tpl.com</a><!-- ←クレジット表記を外す場合はシリアルキーが必要です http://f-tpl.com/credit/ -->
-            </footer>
-
         </div>
     </div>
-
 </body>
 
 </html>

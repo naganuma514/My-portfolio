@@ -47,7 +47,11 @@ exit;
                             <li><a href="../index.php #sec01">メッセージ</a></li>
                             <li><a href="../index.php #sec03">スタッフ</a></li>
                             <li><a href="../index.php #sec05">アクセス</a></li>
+                            <?php if (isset($login_user)) : ?>
+                            <li><a href="../mypage/mypage.php">マイページ</a></li>
+                            <?php else : ?>
                             <li><a href="../login/add_user.php">ログイン</a></li>
+                            <?php endif;?>
                             <li><a href="../booking/booking.php">ご予約</a></li>
                             <li><a href="">お問い合わせ</a></li>
                         </ul>
