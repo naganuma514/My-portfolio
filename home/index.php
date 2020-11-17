@@ -1,8 +1,9 @@
 <?php
 session_start();
 require_once './login/session.php';
-if(isset($_SESSION["login_user"])) {
-    $login_user=setSession($_SESSION["login_user"]);
+if (isset($_SESSION["login_user"])) {
+    $login_user=setSession($_SESSION['login_user']);
+    loginCheck($login_user);
 }
 ?>
 <!doctype html>
@@ -42,7 +43,7 @@ if(isset($_SESSION["login_user"])) {
                             <li><a href="login/add_user.php">ログイン</a></li>
                             <?php endif;?>
                             <li><a href="booking/booking.php">ご予約</a></li>
-                            <li><a href="">お問い合わせ</a></li>
+                            <li><a href="keijiban/index.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">
                             <li><a href="#" target="_blank"><img src="images/iconFb.png" width="20" height="20"

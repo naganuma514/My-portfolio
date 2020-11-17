@@ -3,11 +3,12 @@
 class Register
 {
     private $params;
-
+//バリデーション関数
     public function Validation()
     {
+        //エラーがあればここにエラーメッセージをいれる
         $err = [];
-
+        //POSTをフィルターにかけて連想配列にする
         $this->params = filter_input_array(INPUT_POST, [
             'user_name' => FILTER_DEFAULT,
             'phone' => FILTER_DEFAULT,
@@ -15,40 +16,38 @@ class Register
             'password' => FILTER_DEFAULT,
             'password_conf' => FILTER_DEFAULT
         ]);
-
+        //入力が空だった時のバリデーション
         foreach ((array)$this->params as $key => $value) {
             if ($value === '') {
                 $err[] = $this->checkInput($key);
             }
         }
-
+        //メールの入力エラーチェック
         if ($this->params['email'] !== '' && $this->mailCheck($this->params['email'])) {
             $err[] = "メールアドレスの入力に誤りがあります";
         }
-        
+        //電話番号のエラーチェック
         if ($this->params['phone'] !== '' && $this->phoneCheck($this->params['phone'])) {
             $err[] = "電話番号の入力に誤りがあります";
         }
-
+        //パスワードが一致しているかチェック
         $pass = $this->params['password'];
         $pass_conf = $this->params['password_conf'];
 
         if ($pass !== $pass_conf) {
             $err[] = 'パスワードが一致しません。';
         }
-
-
+        //エラーがあれば格納
         return $err;
     }
-
+    //オブジェクトを変数に代入、確認パスは不要なので削除
     public function getUserInfo()
     {
         $user = (object)$this->params;
         unset($user->password_conf);
         return $user;
     }
-
-    //値がPOSTされていれば、フィルターを適用し、プロパティに代入。
+    //エラーに合ったメッセージを返す
     private function checkInput($value)
     {
         if($value==='user_name') {
@@ -68,7 +67,6 @@ class Register
             return $err;
         }
     }
-
     //メアドの正規表現。誤っていればtrueが返される。
     private function mailCheck($mail)
     {
@@ -79,7 +77,7 @@ class Register
             return true;
         }
     }
-
+    //電話番号の正規表現。誤っていればtrueが返される。
     private function phoneCheck($phone)
     {
         $reg_phone = '/^0[0-9]{9}$|^0[0-9]{10}$/i';
@@ -90,4 +88,3 @@ class Register
         }
     }
 }
-

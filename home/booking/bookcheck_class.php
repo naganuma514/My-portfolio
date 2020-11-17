@@ -3,7 +3,7 @@
 class Register
 {
     private $params;
-
+//
     public function Validation()
     {
         $err = [];
@@ -21,8 +21,6 @@ class Register
                 $err[] = $this->checkInput($key);
             }
         }
-
-
         return $err;
     }
 
@@ -52,11 +50,6 @@ class Register
             return $err;
         }
     }
-
     //メアドの正規表現。誤っていればtrueが返される。
-    
-
-   
-    
 }
 

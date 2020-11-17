@@ -11,20 +11,24 @@ session_start();
 require 'database.php';
 require 'add_class.php';
 require 'session.php';
+//もうログインされてたらホームに飛ばす
 if (isset($_SESSION["login_user"])) {
     $login_user=setSession($_SESSION['login_user']);
     loginCheck($login_user);
 }
+//エラーメッセージ入れる箱
 $err = [];
+//レジスタークラス作成
 $register = new Register();
+//もしPOSTがあれば追加判定開始
 if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     $err = $register->Validation();
     $user = $register->getUserInfo();
-
+//もしエラーがなければ処理開始
     if (count($err) === 0) {
-        // DB接続
+// DB接続
         $pdo = connect();
-        // SQL実行
+// SQL実行
         $success = adduser($pdo,$user->password, $user->user_name,$user->phone,$user->email,);
     }
 }
@@ -82,8 +86,8 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                 </nav>
             </div>
         </div>
-
         <div id="content">
+            <!-- SQLが成功していたら -->
             <?php if (isset($success) && $success) : ?>
             <div class="gologin">
                 <p>ありがとうございます。登録に成功しました。<br>ログインへお進みください。</p>
@@ -91,6 +95,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                     <button class="submit" onclick="location.href='login_user.php'">ログインページへ</button>
                 </p>
             </div>
+            <!-- SQLが未実行の時 -->
             <?php else : ?>
             <legend>新規アカウント登録フォーム</legend>
             <div id="form">

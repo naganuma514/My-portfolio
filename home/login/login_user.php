@@ -97,15 +97,12 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
         </div>
 
         <div id="content">
-            <?php if (count($err) !== 0) : ?>
-            <?php foreach ($err as $e) : ?>
-            <p class="error">・<?php echo h($e); ?></p>
-            <?php endforeach; ?>
-            <?php endif; ?>
-
+        <!-- エラーがあれば全て表示 -->
             <legend>ログイン</legend>
             <div id="form">
                 <p class="form-title">ログインページ</p>
+                <p class="logmessage">登録がお済みで無い方は<a href="add_user.php">こちらから新規登録<br></a>して下さい。</p>
+                
                 <?php if (count($err) !== 0) : ?>
                 <?php foreach ($err as $e) : ?>
                 <p class="error" style="color:red;">・<?php echo h($e); ?></p>
@@ -125,7 +122,6 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                     </p>
                     <div class="center1">
                         <p class="submit"><input type="submit" value="ログイン"></p>
-                        <p class="logmessage">登録がお済みで無い方はこちらから<br><a href="add_user.php">新規登録</a>して下さい。</p>
                     </div>
                 </form>
             </div>

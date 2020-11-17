@@ -28,7 +28,7 @@ if (isset($_SESSION["login_user"])) {
     <div id="wrapper">
         <div id="sidebar">
             <div id="sidebarWrap">
-            <h2>chou chou <br>
+                <h2>chou chou <br>
                     <?php if (isset($login_user)) : ?>
                     <?php echo $login_user['user_name'];?>様</h2>
                 <?php else:?>
@@ -64,13 +64,14 @@ if (isset($_SESSION["login_user"])) {
                 </nav>
             </div>
         </div>
-    <?php if (isset($login_user)) : ?>
+        <?php if (isset($login_user)) : ?>
         <div class="gologin">
-                <p>ログインに成功しました。</p>
-                <p>
-                    <button class="submit" onclick="location.href='../index.php'">ホームへ戻る</button>
-                </p>
-            </div>
-    <?php endif; ?>
+            <p>ログインに成功しました。</p>
+            <p>
+                <button class="submit" onclick="location.href='../index.php'">ホームへ戻る</button>
+            </p>
+        </div>
+        <?php endif; ?>
 </body>
+
 </html>
