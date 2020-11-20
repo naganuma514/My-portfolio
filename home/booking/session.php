@@ -27,7 +27,7 @@ function backUser() {
     <h2　style='text-align:center; fomt-size:100px;'>
                 <p>ご予約には会員登録が必要です。<br>お済みでない方はこちらからお願いします。</p>
                 <p>
-                    <button class='submit' onclick="."location.href="."'../login/add_user.php'>ログインページへ</button>
+                    <button class='submit' onclick="."location.href="."'../login/login_user.php'>ログインページへ</button>
                 </p>
             </h2>
             </div>";

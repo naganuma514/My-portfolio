@@ -50,10 +50,10 @@ exit;
                             <?php if (isset($login_user)) : ?>
                             <li><a href="../mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
-                            <li><a href="../login/add_user.php">ログイン</a></li>
+                            <li><a href="../login/login_user.php">ログイン</a></li>
                             <?php endif;?>
                             <li><a href="../booking/booking.php">ご予約</a></li>
-                            <li><a href="">お問い合わせ</a></li>
+                            <li><a href="../keijiban/board.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">
                             <li><a href="#" target="_blank"><img src="../images/iconFb.png" width="20" height="20"
@@ -72,9 +72,9 @@ exit;
         <div id="content">
             <div class="gologin">
                 <h1>コースを選択してください</h1>
-                
+
                 <form action="booking_check.php" method="post">
-                <?php if (isset($login_user)) : ?>
+                    <?php if (isset($login_user)) : ?>
                     <input type="hidden" name="user_name" value="<?php echo $login_user['user_name']; ?>">
                     <input type="hidden" name="phone" value="<?php echo $login_user['phone']; ?>">
                     <input type="hidden" name="email" value="<?php echo $login_user['email']; ?>">
@@ -140,8 +140,7 @@ exit;
                     <br><br>
                     <div class="center">
                         <br>
-                        <p class="submit"><input type="submit" value="予約を確定する" /></p>　<br>
-                        <button type="button" onclick="history.back()">日付を選び直す</button>
+                        <button type="button" onclick="history.back()">現在この機能は利用できません</button>
                     </div>
                 </form>
             </div>

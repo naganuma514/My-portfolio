@@ -3,7 +3,6 @@ session_start();
 require_once './login/session.php';
 if (isset($_SESSION["login_user"])) {
     $login_user=setSession($_SESSION['login_user']);
-    loginCheck($login_user);
 }
 ?>
 <!doctype html>
@@ -40,10 +39,10 @@ if (isset($_SESSION["login_user"])) {
                             <?php if (isset($login_user)) : ?>
                             <li><a href="mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
-                            <li><a href="login/add_user.php">ログイン</a></li>
+                            <li><a href="login/login_user.php">ログイン</a></li>
                             <?php endif;?>
                             <li><a href="booking/booking.php">ご予約</a></li>
-                            <li><a href="keijiban/index.php">お客様の感想</a></li>
+                            <li><a href="keijiban/board.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">
                             <li><a href="#" target="_blank"><img src="images/iconFb.png" width="20" height="20"

@@ -76,10 +76,10 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                             <?php if (isset($login_user)) : ?>
                             <li><a href="../mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
-                            <li><a href="../login/add_user.php">ログイン</a></li>
+                            <li><a href="../login/login_user.php">ログイン</a></li>
                             <?php endif;?>
                             <li><a href="../booking/booking.php">ご予約</a></li>
-                            <li><a href="">お問い合わせ</a></li>
+                            <li><a href="../keijiban/board.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">
                             <li><a href="#" target="_blank"><img src="../images/iconFb.png" width="20" height="20"
@@ -97,12 +97,12 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
         </div>
 
         <div id="content">
-        <!-- エラーがあれば全て表示 -->
+            <!-- エラーがあれば全て表示 -->
             <legend>ログイン</legend>
             <div id="form">
                 <p class="form-title">ログインページ</p>
-                <p class="logmessage">登録がお済みで無い方は<a href="add_user.php">こちらから新規登録<br></a>して下さい。</p>
-                
+                <p class="logmessage">登録がお済みで無い方は<a href="login_user.php">こちらから新規登録<br></a>して下さい。</p>
+
                 <?php if (count($err) !== 0) : ?>
                 <?php foreach ($err as $e) : ?>
                 <p class="error" style="color:red;">・<?php echo h($e); ?></p>
