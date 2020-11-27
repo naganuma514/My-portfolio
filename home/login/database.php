@@ -43,9 +43,7 @@ function loginuser($pdo,$email) {
         
     $params = [];
     $params[] = $email;
-
     $stmt->execute($params);
-
     $rows = $stmt->fetchAll();
     return $rows;
 }

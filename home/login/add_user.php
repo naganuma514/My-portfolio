@@ -26,12 +26,17 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     $user = $register->getUserInfo();
 //もしエラーがなければ処理開始
     if (count($err) === 0) {
-// DB接続
+        // DB接続
         $pdo = connect();
-// SQL実行
-        $success = adduser($pdo,$user->password, $user->user_name,$user->phone,$user->email,);
+        $same =loginuser($pdo, $user->email);
+        // SQL実行
+        if (empty($same)) {
+            $success = adduser($pdo, $user->password, $user->user_name, $user->phone, $user->email, );
+        } else {
+            $err['same']= "そのメールアドレスは既に登録されています";
+        }
     }
-}
+    }
 ?>
 <!doctype html>
 <html lang="ja">
@@ -99,7 +104,8 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             <legend>新規アカウント登録フォーム</legend>
             <div id="form">
                 <p class="form-title">新規会員登録ページ</p>
-                <p style="text-align:center">登録が完了している方は<a href="login_user.php">こちらから<br>ログイン</a>して下さい。</p>
+                <p style="text-align:center">登録が完了している方は<a href="login_user.php">こちらから<br>ログイン</a>して下さい。</p><br>
+                <p style="text-align:center">うまく登録できない場合は<a href="../index.php #sec05">お電話</a>からご予約お願い致します。</p>
                 <?php if (count($err) !== 0) : ?>
                 <?php foreach ($err as $e) : ?>
                 <p class="error" style="color:red;">・<?php echo h($e); ?></p>

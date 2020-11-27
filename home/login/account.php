@@ -5,7 +5,14 @@ session_start();
 require 'database.php';
 require 'session.php';
 
-backUser($_SESSION['login_user']);
+if(!isset($_SESSION['login_user']) && !isset($_SESSION['main_user'])){
+    backUser($_SESSION['login_user'],$_SESSION['main_user']);
+}
+if (isset($_SESSION["main_user"])) {
+    $main_user=setSession($_SESSION['main_user']);
+    MainCheck($main_user);
+    exit;
+}
 if (isset($_SESSION["login_user"])) {
     $login_user=setSession($_SESSION['login_user']);
     loginCheck($login_user);

@@ -56,8 +56,9 @@ exit;
                             <li><a href="../keijiban/board.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">
-                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP" target="_blank"><img
-                                        src="../images/iconFb.png" width="20" height="20" alt="FB"></a></li>
+                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP"
+                                    target="_blank"><img src="../images/iconFb.png" width="20" height="20" alt="FB"></a>
+                            </li>
                             <li><a href="https://instagram.com/akemi_naganuma?igshid=12ufni45rbr8p" target="_blank"><img
                                         src="../images/iconInsta.png" width="20" height="20" alt="Instagram"></a></li>
                             <li><a href="https://www.youtube.com/watch?v=kIapP22ndtI&feature=emb_title"

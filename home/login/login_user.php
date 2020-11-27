@@ -29,7 +29,12 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             $password_hash = $row['password'];
 
             // パスワード一致
-            if (password_verify($user->password, $password_hash)) {
+        if($row['email']==="happinessbihada@gmail.com" && password_verify($user->password, $password_hash)) {
+                session_regenerate_id(true);
+                $_SESSION['main_user'] = $row;
+                header('Location:account.php');
+                return;
+        }elseif(password_verify($user->password, $password_hash)) {
                 session_regenerate_id(true);
                 $_SESSION['login_user'] = $row;
                 header('Location:account.php');
@@ -39,8 +44,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
         }
         
     }
- }
-
+}
 ?>
 <!doctype html>
 <html lang="ja">
@@ -82,8 +86,9 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                             <li><a href="../keijiban/board.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">
-                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP" target="_blank"><img
-                                        src="../images/iconFb.png" width="20" height="20" alt="FB"></a></li>
+                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP"
+                                    target="_blank"><img src="../images/iconFb.png" width="20" height="20" alt="FB"></a>
+                            </li>
                             <li><a href="https://instagram.com/akemi_naganuma?igshid=12ufni45rbr8p" target="_blank"><img
                                         src="../images/iconInsta.png" width="20" height="20" alt="Instagram"></a></li>
                             <li><a href="https://www.youtube.com/watch?v=kIapP22ndtI&feature=emb_title"
@@ -100,7 +105,8 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             <legend>ログイン</legend>
             <div id="form">
                 <p class="form-title">ログインページ</p>
-                <p class="logmessage">登録がお済みで無い方は<a href="add_user.php">こちらから新規登録<br></a>して下さい。</p>
+                <p class="logmessage">登録がお済みで無い方は<a href="add_user.php">こちらから新規登録<br></a>して下さい。</p><br>
+                <p class="logmessage">ログインできない場合は<a href="../index.php #sec05">お電話</a>からご予約お願い致します。</p>
 
                 <?php if (count($err) !== 0) : ?>
                 <?php foreach ($err as $e) : ?>

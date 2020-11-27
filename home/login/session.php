@@ -7,7 +7,14 @@ function setSession($session)
         return $login_user;
     }
 }
-
+function MainSession($session)
+{
+    if (isset($session)) {
+        session_regenerate_id(true);
+        $main_user=$session;
+        return $main_user;
+    }
+}
 function loginCheck($session) {
     if(isset($session)) {
         header("Location:../index.php");
@@ -19,9 +26,20 @@ function loginCheck($session) {
         }
     }
 
+    function MainCheck($session) {
+        if(isset($session)) {
+            header("Location:../mother/mother_home.php");
+        exit;   
+        } elseif (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
+                unset($session);
+                header("Location:../mother/mother_home.php");
+                exit;
+            }
+        }
 
-function backUser($session) {
-    if (!isset($_SESSION['login_user'])) {
+
+function backUser($session, $session2) {
+    if (!isset($session) && !isset($session2)) {
         header('Location:/../index.php');
         exit;
     }

@@ -157,7 +157,7 @@ if (isset($_SESSION["login_user"])) {
                     <ul class="col2">
                         <li>
                             <p>〒414-0044<br>静岡県伊東市川奈１２５９−５３</p>
-                            <p>TEL +818026673281</p>
+                            <p>TEL 08026673281</p>
                             <p><a href="https://instagram.com/akemi_naganuma?igshid=51dmc6ggj0c6">インスタグラム</a></p>
                             <p></p>
                         </li>
