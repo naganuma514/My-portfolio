@@ -11,7 +11,6 @@ class Register
         //POSTをフィルターにかけて連想配列にする
         $this->params = filter_input_array(INPUT_POST, [
             'user_name' => FILTER_DEFAULT,
-            'phone' => FILTER_DEFAULT,
             'email' => FILTER_DEFAULT,
             'password' => FILTER_DEFAULT,
             'password_conf' => FILTER_DEFAULT
@@ -26,16 +25,16 @@ class Register
         if ($this->params['email'] !== '' && $this->mailCheck($this->params['email'])) {
             $err[] = "メールアドレスの入力に誤りがあります";
         }
-        //電話番号のエラーチェック
-        if ($this->params['phone'] !== '' && $this->phoneCheck($this->params['phone'])) {
-            $err[] = "電話番号の入力に誤りがあります";
-        }
         //パスワードが一致しているかチェック
         $pass = $this->params['password'];
         $pass_conf = $this->params['password_conf'];
 
         if ($pass !== $pass_conf) {
             $err[] = 'パスワードが一致しません。';
+        }
+        $countpass=strlen($this->params['password']);
+        if($countpass<8) {
+            $err[] = 'パスワードは8文字以上入力してください';
         }
         //エラーがあれば格納
         return $err;
@@ -56,10 +55,7 @@ class Register
         } elseif ($value==='email') {
             $err = 'メールアドレスは入力必須です。';
             return $err;
-        } elseif ($value==='phone') {
-            $err = '電話番号は入力必須です。';
-            return $err;
-        }elseif ($value==='password') {
+        } elseif ($value==='password') {
             $err = 'パスワードは入力必須です。';
             return $err;
         }elseif ($value==='password_conf') {
@@ -72,16 +68,6 @@ class Register
     {
         $reg_str = "/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/";
         if (preg_match($reg_str, $mail)) {
-            return  false;
-        } else {
-            return true;
-        }
-    }
-    //電話番号の正規表現。誤っていればtrueが返される。
-    private function phoneCheck($phone)
-    {
-        $reg_phone = '/^0[0-9]{9}$|^0[0-9]{10}$/i';
-        if (preg_match($reg_phone, $phone)) {
             return  false;
         } else {
             return true;

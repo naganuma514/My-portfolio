@@ -27,12 +27,12 @@ function connect()
 
     return $pdo;
 }
-function adduser($pdo,$password,$name,$phone,$email) {
-    $stmt = $pdo->prepare('INSERT INTO `USER` (`id`, `user_name`, `phone`,`email`,`password`) VALUES (null, ?, ?, ?, ?)');
+function adduser($pdo,$password,$name,$email) {
+    $stmt = $pdo->prepare('INSERT INTO `USER` (`id`, `user_name`,`email`,`password`) VALUES (null, ?, ?, ?)');
 
         // パラメータ設定
         $pass_hash = password_hash($password, PASSWORD_DEFAULT);
-        $params = [0 => $name, 1 => $phone, 2 => $email, 3 => $pass_hash];
+        $params = [0 => $name, 1 => $email, 2 => $pass_hash];
 
         // SQL実行
         $success = $stmt->execute($params);

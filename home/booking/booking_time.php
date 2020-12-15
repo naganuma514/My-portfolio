@@ -23,7 +23,7 @@ exit;
     <meta charset="UTF-8">
     <meta name="description" content="最新技術と自然との調和を目指す">
     <meta name="viewport" content="width=device-width">
-    <title>Home | NOEVIER beaty studio chou chou </title>
+    <title>beaty studio chou chou </title>
     <link rel="stylesheet" media="all" href="../css/booking.css?20180925">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="../js/script.js"></script>
@@ -35,7 +35,7 @@ exit;
             <div id="sidebarWrap">
                 <h2>chou chou <br>
                     <?php if (isset($login_user)) : ?>
-                    <?php echo $login_user['user_name'];?>様</h2>
+                    <?php echo h($login_user['user_name']);?>様</h2>
                 <?php else:?>
                 ゲスト様</h2>
                 <?php endif;?>
@@ -45,14 +45,14 @@ exit;
                         <ul>
                             <li><a href="../index.php #top">トップ</a></li>
                             <li><a href="../index.php #sec01">メッセージ</a></li>
-                            <li><a href="../index.php #sec03">スタッフ</a></li>
+                            <li><a href="../index.php #sec04">ポートフォリオ</a></li>
                             <li><a href="../index.php #sec05">アクセス</a></li>
                             <?php if (isset($login_user)) : ?>
                             <li><a href="../mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
-                            <li><a href="../login/login_user.php">ログイン</a></li>
+                            <li><a href="../login/login_user.php">ログイン（練習中）</a></li>
                             <?php endif;?>
-                            <li><a href="../booking/booking.php">ご予約</a></li>
+                            <li><a href="../booking/booking.php">ご予約（練習中）</a></li>
                             <li><a href="../keijiban/board.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">
@@ -75,10 +75,9 @@ exit;
 
                 <form action="booking_check.php" method="post">
                     <?php if (isset($login_user)) : ?>
-                    <input type="hidden" name="user_name" value="<?php echo $login_user['user_name']; ?>">
-                    <input type="hidden" name="phone" value="<?php echo $login_user['phone']; ?>">
-                    <input type="hidden" name="email" value="<?php echo $login_user['email']; ?>">
-                    <input type="hidden" name="booktime" value="<?php echo $booktime; ?>">
+                    <input type="hidden" name="user_name" value="<?php echo h($login_user['user_name']); ?>">
+                    <input type="hidden" name="email" value="<?php echo h($login_user['email']); ?>">
+                    <input type="hidden" name="booktime" value="<?php echo h($booktime); ?>">
                     <?php endif; ?>
 
                     <div class="float" align='center'>
@@ -140,7 +139,9 @@ exit;
                     <br><br>
                     <div class="center">
                         <br>
-                        <button type="button" onclick="history.back()">現在この機能は利用できません</button>
+                        <p>現在この機能は練習中です！もっと完璧な安全対策を構築出来るようになってからお客様に使ってもらいたいので、あくまで息子の勉強の成果として公開させていただきます。申し訳ありませんが、お客様のご利用はお控えください。頑張って勉強するので楽しみにお待ちください。
+                        </p>
+                        <p class="submit"><input type="submit" value="練習用予約を使ってみる" /></p>
                     </div>
                 </form>
             </div>

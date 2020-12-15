@@ -9,6 +9,7 @@ session_start();
 
 //DBとClassの読み込み。
 require 'session.php';
+require 'database.php';
 if (!empty($_GET['btn_logout'])) {
     unsetlog();
 }
@@ -27,7 +28,7 @@ if (isset($_SESSION["login_user"])) {
     <meta charset="UTF-8">
     <meta name="description" content="最新技術と自然との調和を目指す">
     <meta name="viewport" content="width=device-width">
-    <title>Home | NOEVIER beaty studio chou chou </title>
+    <title>beaty studio chou chou </title>
     <link rel="stylesheet" media="all" href="../css/login.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="../js/script.js"></script>
@@ -39,7 +40,7 @@ if (isset($_SESSION["login_user"])) {
             <div id="sidebarWrap">
                 <h2>chou chou <br>
                     <?php if (isset($login_user)) : ?>
-                    <?php echo $login_user['user_name'];?>様</h2>
+                    <?php echo h($login_user['user_name']);?>様</h2>
                 <?php else:?>
                 ゲスト様</h2>
                 <?php endif;?>
@@ -49,19 +50,20 @@ if (isset($_SESSION["login_user"])) {
                         <ul>
                             <li><a href="../index.php #top">トップ</a></li>
                             <li><a href="../index.php #sec01">メッセージ</a></li>
-                            <li><a href="../index.php #sec03">スタッフ</a></li>
+                            <li><a href="../index.php #sec04">ポートフォリオ</a></li>
                             <li><a href="../index.php #sec05">アクセス</a></li>
                             <?php if (isset($login_user)) : ?>
                             <li><a href="../mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
-                            <li><a href="../login/login_user.php">ログイン</a></li>
+                            <li><a href="../login/login_user.php">ログイン（練習中）</a></li>
                             <?php endif;?>
-                            <li><a href="../booking/booking.php">ご予約</a></li>
+                            <li><a href="../booking/booking.php">ご予約（練習中）</a></li>
                             <li><a href="../keijiban/board.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">
-                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP" target="_blank"><img
-                                        src="../images/iconFb.png" width="20" height="20" alt="FB"></a></li>
+                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP"
+                                    target="_blank"><img src="../images/iconFb.png" width="20" height="20" alt="FB"></a>
+                            </li>
                             <li><a href="https://instagram.com/akemi_naganuma?igshid=12ufni45rbr8p" target="_blank"><img
                                         src="../images/iconInsta.png" width="20" height="20" alt="Instagram"></a></li>
                             <li><a href="https://www.youtube.com/watch?v=kIapP22ndtI&feature=emb_title"
@@ -75,7 +77,7 @@ if (isset($_SESSION["login_user"])) {
         </div>
         　<div id="content">
             <div class="gologin">
-                <h1><?php echo $login_user['user_name'];?>様のマイページ</h1><br>
+                <h1><?php echo h($login_user['user_name']);?>様のマイページ</h1><br>
                 <form method="get" action="">
                     <p class="submit"><input type="submit" name="btn_logout" value="ログアウトする" /></p>
                 </form>

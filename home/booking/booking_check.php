@@ -36,7 +36,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
         $pdo = connect();
 
         // ステートメント
-        $success=insertbook($pdo,$user->user_name, $user->phone,$user->email,$user->course,$user->booktime);
+        $success=insertbook($pdo,$user->user_name,$user->email,$user->course,$user->booktime);
 
     }
 }
@@ -48,7 +48,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     <meta charset="UTF-8">
     <meta name="description" content="最新技術と自然との調和を目指す">
     <meta name="viewport" content="width=device-width">
-    <title>Home | NOEVIER beaty studio chou chou </title>
+    <title>beaty studio chou chou </title>
     <link rel="stylesheet" media="all" href="../css/booking.css?20180926">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="../js/script.js"></script>
@@ -60,7 +60,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             <div id="sidebarWrap">
                 <h2>chou chou <br>
                     <?php if (isset($login_user)) : ?>
-                    <?php echo $login_user['user_name'];?>様</h2>
+                    <?php echo h($login_user['user_name']);?>様</h2>
                 <?php else:?>
                 ゲスト様</h2>
                 <?php endif;?>
@@ -70,19 +70,20 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                         <ul>
                             <li><a href="../index.php #top">トップ</a></li>
                             <li><a href="../index.php #sec01">メッセージ</a></li>
-                            <li><a href="../index.php #sec03">スタッフ</a></li>
+                            <li><a href="../index.php #sec04">ポートフォリオ</a></li>
                             <li><a href="../index.php #sec05">アクセス</a></li>
                             <?php if (isset($login_user)) : ?>
                             <li><a href="../mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
-                            <li><a href="../login/login_user.php">ログイン</a></li>
+                            <li><a href="../login/login_user.php">ログイン（練習中）</a></li>
                             <?php endif;?>
-                            <li><a href="../booking/booking.php">ご予約</a></li>
+                            <li><a href="../booking/booking.php">ご予約（練習中）</a></li>
                             <li><a href="../keijiban/board.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">
-                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP" target="_blank"><img
-                                        src="../images/iconFb.png" width="20" height="20" alt="FB"></a></li>
+                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP"
+                                    target="_blank"><img src="../images/iconFb.png" width="20" height="20" alt="FB"></a>
+                            </li>
                             <li><a href="https://instagram.com/akemi_naganuma?igshid=12ufni45rbr8p" target="_blank"><img
                                         src="../images/iconInsta.png" width="20" height="20" alt="Instagram"></a></li>
                             <li><a href="https://www.youtube.com/watch?v=kIapP22ndtI&feature=emb_title"
@@ -99,12 +100,12 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             <div class="gologin">
                 <?php if (count($err) !== 0) : ?>
                 <?php foreach ($err as $er) : ?>
-                <?php echo $er; ?>
+                <?php echo h($er); ?>
                 <?php endforeach; ?>
                 <?php elseif (isset($success)) : ?>
                 <h1>予約が完了しました。</h1>
-                <p><?php echo $user->user_name; ?>様</p>
-                <p><?php echo $user->booktime; ?></p>
+                <p><?php echo h($user->user_name); ?>様</p>
+                <p><?php echo h($user->booktime); ?></p>
                 <button class='submit' onclick="location.href='../index.php'">ホームに戻る</button>
                 <?php else  : ?>
                 <h1>予約に失敗しました。<br>

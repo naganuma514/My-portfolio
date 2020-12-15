@@ -41,10 +41,10 @@ function insertText($pdo,$a,$b) {
             echo '予約が完了しました';
         } 
 } 
-function insertbook($pdo,$user_name,$phone,$email,$course,$booktime){
-        $stmt = $pdo->prepare('INSERT INTO `reser` (`id`, `name`, `phone`,`email`,`course`,`datetime`) VALUES (null, ?, ?, ?, ?, ?)');
+function insertbook($pdo,$user_name,$email,$course,$booktime){
+        $stmt = $pdo->prepare('INSERT INTO `reser` (`id`, `name`,`email`,`course`,`datetime`) VALUES (null, ?, ?, ?, ?)');
         // パラメータ設定
-        $params = [0 => $user_name, 1 => $phone, 2 => $email, 3 => $course, 4 => $booktime];
+        $params = [0 => $user_name, 1 => $email, 2 => $course, 3 => $booktime];
         // SQL実行
         $success = $stmt->execute($params);
         return $success;

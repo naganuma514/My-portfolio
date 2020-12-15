@@ -31,7 +31,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
         $same =loginuser($pdo, $user->email);
         // SQL実行
         if (empty($same)) {
-            $success = adduser($pdo, $user->password, $user->user_name, $user->phone, $user->email, );
+            $success = adduser($pdo, $user->password, $user->user_name,$user->email, );
         } else {
             $err['same']= "そのメールアドレスは既に登録されています";
         }
@@ -45,7 +45,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     <meta charset="UTF-8">
     <meta name="description" content="最新技術と自然との調和を目指す">
     <meta name="viewport" content="width=device-width">
-    <title>Home | NOEVIER beaty studio chou chou </title>
+    <title>beaty studio chou chou </title>
     <link rel="stylesheet" media="all" href="../css/login.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="../js/script.js"></script>
@@ -57,7 +57,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             <div id="sidebarWrap">
                 <h2>chou chou <br>
                     <?php if (isset($login_user)) : ?>
-                    <?php echo $login_user['user_name'];?>様</h2>
+                    <?php echo h($login_user['user_name']);?>様</h2>
                 <?php else:?>
                 ゲスト様</h2>
                 <?php endif;?>
@@ -67,19 +67,20 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                         <ul>
                             <li><a href="../index.php #top">トップ</a></li>
                             <li><a href="../index.php #sec01">メッセージ</a></li>
-                            <li><a href="../index.php #sec03">スタッフ</a></li>
+                            <li><a href="../index.php #sec04">ポートフォリオ</a></li>
                             <li><a href="../index.php #sec05">アクセス</a></li>
                             <?php if (isset($login_user)) : ?>
                             <li><a href="../mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
-                            <li><a href="../login/login_user.php">ログイン</a></li>
+                            <li><a href="../login/login_user.php">ログイン（練習中）</a></li>
                             <?php endif;?>
-                            <li><a href="../booking/booking.php">ご予約</a></li>
+                            <li><a href="../booking/booking.php">ご予約（練習中）</a></li>
                             <li><a href="../keijiban/board.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">
-                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP" target="_blank"><img
-                                        src="../images/iconFb.png" width="20" height="20" alt="FB"></a></li>
+                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP"
+                                    target="_blank"><img src="../images/iconFb.png" width="20" height="20" alt="FB"></a>
+                            </li>
                             <li><a href="https://instagram.com/akemi_naganuma?igshid=12ufni45rbr8p" target="_blank"><img
                                         src="../images/iconInsta.png" width="20" height="20" alt="Instagram"></a></li>
                             <li><a href="https://www.youtube.com/watch?v=kIapP22ndtI&feature=emb_title"
@@ -122,11 +123,6 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                     <p class="mail">
                         <input id="email" name="email" type="text" />
                     </p>
-                    <p>電話番号</p>
-                    <p class="form-title">
-                    <p class="phone">
-                        <input id="phone" name="phone" type="text" />
-                    </p>
                     <p>パスワード</p>
                     <p class="form-title">
                     <p class="pass">
@@ -139,7 +135,9 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                     </p>
                     </p>
                     <div class="center">
-                        <p class="submit"><input type="submit" value="新規登録" /></p>
+                        <p>現在この機能は練習中です！もっと完璧な安全対策を構築出来るようになってからお客様に使ってもらいたいので、あくまで息子の勉強の成果として公開させていただきます。申し訳ありませんが、お客様のご利用はお控えください。頑張って勉強するので楽しみにお待ちください。
+                        </p>
+                        <p class="submit"><input type="submit" value="練習用新規登録を使ってみる" /></p>
                     </div>
                 </form>
                 <?php endif;?>

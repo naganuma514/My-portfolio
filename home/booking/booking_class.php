@@ -36,7 +36,7 @@ class Booking {
     public function getHtmltitle() {
         date_default_timezone_set('Asia/Tokyo');
         $this->html_title = date('n月d日', $this->timestamp);
-        echo $this->html_title;
+        echo h($this->html_title);
      }
 
      //1週間後取得

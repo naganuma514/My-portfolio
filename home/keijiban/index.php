@@ -26,7 +26,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     <meta charset="UTF-8">
     <meta name="description" content="最新技術と自然との調和を目指す">
     <meta name="viewport" content="width=device-width">
-    <title>Home | NOEVIER beaty studio chou chou </title>
+    <title>beaty studio chou chou </title>
     <link rel="stylesheet" media="all" href="../css/keijiban.css?2018030">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="../js/script.js"></script>
@@ -38,7 +38,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             <div id="sidebarWrap">
                 <h2>chou chou <br>
                     <?php if (isset($login_user)) : ?>
-                    <?php echo $login_user['user_name'];?>様</h2>
+                    <?php echo h($login_user['user_name']);?>様</h2>
                 <?php else:?>
                 ゲスト様</h2>
                 <?php endif;?>
@@ -48,14 +48,14 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                         <ul>
                             <li><a href="../index.php #top">トップ</a></li>
                             <li><a href="../index.php #sec01">メッセージ</a></li>
-                            <li><a href="../index.php #sec03">スタッフ</a></li>
+                            <li><a href="../index.php #sec04">ポートフォリオ</a></li>
                             <li><a href="../index.php #sec05">アクセス</a></li>
                             <?php if (isset($login_user)) : ?>
                             <li><a href="../mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
-                            <li><a href="../login/login_user.php">ログイン</a></li>
+                            <li><a href="../login/login_user.php">ログイン（練習中）</a></li>
                             <?php endif;?>
-                            <li><a href="../booking/booking.php">ご予約</a></li>
+                            <li><a href="../booking/booking.php">ご予約（練習中）</a></li>
                             <li><a href="../keijiban/board.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">

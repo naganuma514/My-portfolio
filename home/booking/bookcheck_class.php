@@ -10,7 +10,6 @@ class Register
 
         $this->params = filter_input_array(INPUT_POST, [
             'user_name' => FILTER_DEFAULT,
-            'phone' => FILTER_DEFAULT,
             'email' => FILTER_DEFAULT,
             'course' => FILTER_DEFAULT,
             'booktime' => FILTER_DEFAULT
@@ -39,10 +38,7 @@ class Register
         } elseif ($value==='email') {
             $err = 'ご予約にはログインが必要です';
             return $err;
-        } elseif ($value==='phone') {
-            $err = 'ご予約にはログインが必要です';
-            return $err;
-        }elseif ($value==='course') {
+        } elseif ($value==='course') {
             $err = 'ご予約にはログインが必要です';
             return $err;
         }elseif ($value==='booktime') {

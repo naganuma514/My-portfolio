@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once './login/session.php';
+require_once './login/database.php';
 if (isset($_SESSION["login_user"])) {
     $login_user=setSession($_SESSION['login_user']);
 }
@@ -12,7 +13,7 @@ if (isset($_SESSION["login_user"])) {
     <meta charset="UTF-8">
     <meta name="description" content="最新技術と自然との調和を目指す">
     <meta name="viewport" content="width=device-width">
-    <title>Home | NOEVIER beaty studio chou chou </title>
+    <title>beaty studio chou chou </title>
     <link rel="stylesheet" media="all" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="js/script.js"></script>
@@ -24,7 +25,7 @@ if (isset($_SESSION["login_user"])) {
             <div id="sidebarWrap">
                 <h1>chou chou <br>
                     <?php if (isset($login_user)) : ?>
-                    <?php echo $login_user['user_name'];?>様</h1>
+                    <?php echo h($login_user['user_name']);?>様</h1>
                 <?php else : ?>
                 ゲスト様</h1>
                 <?php endif;?>
@@ -34,21 +35,22 @@ if (isset($_SESSION["login_user"])) {
                         <ul>
                             <li><a href="#top">トップ</a></li>
                             <li><a href="#sec01">メッセージ</a></li>
-                            <li><a href="#sec03">スタッフ</a></li>
+                            <li><a href="#sec04">ポートフォリオ</a></li>
                             <li><a href="#sec05">アクセス</a></li>
                             <?php if (isset($login_user)) : ?>
                             <li><a href="mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
-                            <li><a href="login/login_user.php">ログイン</a></li>
+                            <li><a href="login/login_user.php">ログイン（練習中）</a></li>
                             <?php endif;?>
-                            <li><a href="booking/booking.php">ご予約</a></li>
+                            <li><a href="booking/booking.php">ご予約（練習中）</a></li>
                             <li><a href="keijiban/board.php">お客様の感想</a></li>
                         </ul>
                         <ul id="sns">
-                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP" target="_blank"><img src="images/iconFb.png" width="20" height="20"
-                                        alt="FB"></a></li>
-                            <li><a href="https://instagram.com/akemi_naganuma?igshid=12ufni45rbr8p" target="_blank"><img src="images/iconInsta.png" width="20" height="20"
-                                        alt="Instagram"></a></li>
+                            <li><a href="https://m.facebook.com/people/あけみ-永沼/100009407933366?locale2=ja_JP"
+                                    target="_blank"><img src="images/iconFb.png" width="20" height="20" alt="FB"></a>
+                            </li>
+                            <li><a href="https://instagram.com/akemi_naganuma?igshid=12ufni45rbr8p" target="_blank"><img
+                                        src="images/iconInsta.png" width="20" height="20" alt="Instagram"></a></li>
                             <li><a href="https://www.youtube.com/watch?v=kIapP22ndtI&feature=emb_title"
                                     target="_blank"><img src="images/iconYouTube.png" width="20" height="20"
                                         alt="You Tube"></a></li>
@@ -80,10 +82,10 @@ if (isset($_SESSION["login_user"])) {
                     <li><img src="images/akemikorona.jpg" width="360" height="350" alt=""></li>
                     <li><img src="images/akaruimise.jpg" width="360" height="350" alt=""></li>
                     <li><img src="images/freemeiku.jpg" width="360" height="350" alt=""></li>
-                    <li class="full"><img src="images/photo07.jpg" width="1080" height="695" alt=""></li>
-                    <li><img src="images/photo08.jpg" width="360" height="350" alt=""></li>
-                    <li><img src="images/photo09.jpg" width="360" height="350" alt=""></li>
-                    <li><img src="images/photo10.jpg" width="360" height="350" alt=""></li>
+                    <li class="full"><img src="images/width.jpg" width="1080" height="695" alt=""></li>
+                    <li><img src="images/freemarket.jpg" width="360" height="350" alt=""></li>
+                    <li><img src="images/tating.jpg" width="360" height="350" alt=""></li>
+                    <li><img src="images/flower.jpg" width="360" height="350" alt=""></li>
                 </ul>
             </section>
             <!-- // GALLERY -->
@@ -129,6 +131,26 @@ if (isset($_SESSION["login_user"])) {
             <!-- PROJECT -->
             <section id="sec04">
                 <header>
+                    <h2><span>PORTFOLIO</span></h2>
+                </header>
+                <div class="article">
+                    <img src="images/musuko.jpg" width="370" height="224" alt="">
+                    <p>当サロン店長の長男、永沼優大です。<br>母がいつもお世話になっております。<br></p>
+                    <p>３月からコロナ禍になり、お客様が来店しづらい状況が続きました。
+                    それでも不慣れなSNSを使い、宣伝を頑張っていた母を見て何かできることは無いかと自分なりに考え、生まれたのがこのwebサイトです。
+                    <br><br>
+                    このサイトはHTML、CSS、JavaScript、PHPというプログラミング言語を使って製作しました。最も使っている言語はPHPです。<br>
+                    主な機能として<br>
+                    ・ログイン機能（お客様のご利用は現在は不可）<br>
+                    ・予約機能（お客様のご利用は現在は不可）<br>
+                    ・レビュー、感想機能<br>
+                    ・母の管理機能<br><br>
+                    しかしログインと予約は個人情報を扱うため、お客様に使ってもらうにはさらなる安全対策が必要という課題を見つけました。<br>
+                    今回初めてプログラミングを学習しましたが、とても奥が深く、難しい技術です。しかし誰かに使ってもらう、喜んでもらう
+                    ために学ぶというプロセスに魅力を感じました。さらに学んでいき、いつか完璧なログイン機能、予約機能をお客様にご利用いただけたらと思います。楽しみにお待ちください。
+                    </p>
+                </div>
+                <header>
                     <h2><span>PROJECT</span></h2>
                 </header>
                 <div class="inner">
@@ -136,13 +158,6 @@ if (isset($_SESSION["login_user"])) {
                         <img src="images/akemikorona.jpg" width="370" height="224" alt="">
                         <p>このようなご時世なので、当店では感染予防対策を徹底しています。<br>近頃コンビニでよく目にするビニールカーテンを手作りして、お手入れ時に使用しています。</p>
                         <p>完全個別制、換気、消毒、マスク、手洗い、等、様々な対策を取り、お客様に安心してお越し頂けるよう、対策しております。
-                        </p>
-                    </div>
-                    <div class="article">
-                        <img src="images/akaruimise.jpg" width="370" height="224" alt="">
-                        <p>これまで培ってきた私たちの経験や実績をもとに、数々の素晴らしいお客様にご愛顧いただいております。</p>
-                        <p>小さなお子様を連れて来て下さるお客様も大歓迎です！お子様達の元気でかわいい笑顔でお客様もスタッフも笑顔の溢れる楽しいサロンです。
-                            <br>どんな些細なお悩みでも、真っすぐに対応します！お気軽にサロンまでいらしてください！！
                         </p>
                     </div>
                 </div>
