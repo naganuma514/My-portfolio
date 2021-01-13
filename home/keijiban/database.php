@@ -46,15 +46,32 @@ $sql = "SELECT * FROM message ORDER BY id DESC LIMIT 0,20;";
 $stmt = $pdo->query($sql);
 return $stmt;
   }
-function Avg($pdo) {
-$sql="SELECT avg(star) FROM message";
-$avg=$pdo->query($sql);
-Avg2($avg);
-}
-function Avg2($avg) {
-    foreach($avg as $av){
-        $av["avg(star)"]=round($av["avg(star)"]);
-        echo $av["avg(star)"];
-  }
-}
+  
+    function Avg3($pdo)
+    {
+        $sql="SELECT avg(star) FROM message";
+        $avg3=$pdo->query($sql);
+        Avg4($avg3);
+    }
+    function Avg4($avg3)
+    {
+        foreach ($avg3 as $av2) {
+            $star["avg(star)"]=round($av2["avg(star)"], 1);
+            $star["avg(star)"]=$star["avg(star)"]/5*100;
+            echo $star["avg(star)"];
+        }
+    }
 
+    function rate($pdo)
+    {
+        $sql="SELECT avg(star) FROM message";
+        $rate=$pdo->query($sql);
+        rates($rate);
+    }
+    function rates($rate)
+    {
+        foreach ($rate as $rates) {
+            $rates["avg(star)"]=round($rates["avg(star)"], 1);
+            echo $rates["avg(star)"];
+        }
+    }

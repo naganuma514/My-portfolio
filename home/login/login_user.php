@@ -29,7 +29,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             $password_hash = $row['password'];
 
             // パスワード一致
-        if($row['email']==="happinessbihada@gmail.com" && password_verify($user->password, $password_hash)) {
+        if($row['id']==="53" && password_verify($user->password, $password_hash)) {
                 session_regenerate_id(true);
                 $_SESSION['main_user'] = $row;
                 header('Location:account.php');
@@ -73,10 +73,10 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                     <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
                     <div class="panel">
                         <ul>
-                            <li><a href="../index.php #top">トップ</a></li>
-                            <li><a href="../index.php #sec01">メッセージ</a></li>
-                            <li><a href="../index.php #sec04">ポートフォリオ</a></li>
-                            <li><a href="../index.php #sec05">アクセス</a></li>
+                            <li><a href="../index.php#top">トップ</a></li>
+                            <li><a href="../index.php#sec01">メッセージ</a></li>
+                            <li><a href="../index.php#sec04">ポートフォリオ</a></li>
+                            <li><a href="../index.php#sec05">アクセス</a></li>
                             <?php if (isset($login_user)) : ?>
                             <li><a href="../mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
@@ -113,6 +113,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                 <p class="error" style="color:red;">・<?php echo h($e); ?></p>
                 <?php endforeach; ?>
                 <?php endif; ?>
+                <div class="star-rating">
                 <form action="" method="post">
                     <p>メールアドレス</p>
                     <p class="form-title">

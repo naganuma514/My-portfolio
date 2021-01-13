@@ -23,7 +23,7 @@ $stmt = think($pdo);
     <meta name="description" content="最新技術と自然との調和を目指す">
     <meta name="viewport" content="width=device-width">
     <title>beaty studio chou chou </title>
-    <link rel="stylesheet" media="all" href="../css/booking.css?2018030">
+    <link rel="stylesheet" media="all" href="../css/booking.css?2018033">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="../js/script.js"></script>
 </head>
@@ -42,10 +42,10 @@ $stmt = think($pdo);
                     <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
                     <div class="panel">
                         <ul>
-                            <li><a href="../index.php #top">トップ</a></li>
-                            <li><a href="../index.php #sec01">メッセージ</a></li>
-                            <li><a href="../index.php #sec04">ポートフォリオ</a></li>
-                            <li><a href="../index.php #sec05">アクセス</a></li>
+                            <li><a href="../index.php#top">トップ</a></li>
+                            <li><a href="../index.php#sec01">メッセージ</a></li>
+                            <li><a href="../index.php#sec04">ポートフォリオ</a></li>
+                            <li><a href="../index.php#sec05">アクセス</a></li>
                             <?php if (isset($login_user)) : ?>
                             <li><a href="../mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
@@ -76,8 +76,13 @@ $stmt = think($pdo);
                     匿名でご記入出来るのでお気軽に記入して頂けたらと思います！</p>
                 <h5 style="text-align:center;">お客様からの平均評価</h5>
                 <h1 style="text-align:center;">
-                    <span class="star5_rating" data-rate="<?php Avg($pdo); ?>"></span>
+                <div class="star-rating">
+            <div class="star-rating-front" style="width: <?php Avg3($pdo); ?>%">★★★★★</div>
+            <div class="star-rating-back">★★★★★</div>
+            </div>
+                    <p><?php rate($pdo); ?>点</p>
                 </h1>
+                <p style="text-align:center;">ご感想一覧</p>
                 <hr>
                 <section>
                     <?php if( !empty($stmt) ): ?>
@@ -90,7 +95,7 @@ $stmt = think($pdo);
                                 echo "<a href='../mother/delete.php?reservation=$value[id]'>削除</a>";
                             }?>
                         </div>
-                        <p><?php echo h($value['message']); ?></p>
+                        <p style="white-space: pre-wrap;"><?php echo h($value['message']); ?></p>
                         <hr>
                     </article>
                     <?php endforeach; ?>

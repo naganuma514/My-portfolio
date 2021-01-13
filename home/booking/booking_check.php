@@ -11,22 +11,27 @@ session_start();
 require 'database.php';
 require 'bookcheck_class.php';
 require 'session.php';
+//ログインセッションがなければホームへ戻す
 if (!isset($_SESSION['login_user'])) {
     backUser();
 }
+//セッションがあればセッションを変数に代入
 if (isset($_SESSION["login_user"])) {
     $login_user=setSession($_SESSION['login_user']);
 }
+//コース未選択時のバリデーション
 if(!isset($_POST['course'])) {
     course();
 }
+//コースの形式チェック
 if ($_POST['booktime'] !== date("Y-m-d H:i:s", strtotime($_POST['booktime']))) {
     booktimes();
 }
-
+//エラーをカウントする関数
 $err = [];
 $register = new Register();
 if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
+    //
     $err = $register->Validation();
     $user = $register->getUserInfo();
 
@@ -68,10 +73,10 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                     <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
                     <div class="panel">
                         <ul>
-                            <li><a href="../index.php #top">トップ</a></li>
-                            <li><a href="../index.php #sec01">メッセージ</a></li>
-                            <li><a href="../index.php #sec04">ポートフォリオ</a></li>
-                            <li><a href="../index.php #sec05">アクセス</a></li>
+                            <li><a href="../index.php#top">トップ</a></li>
+                            <li><a href="../index.php#sec01">メッセージ</a></li>
+                            <li><a href="../index.php#sec04">ポートフォリオ</a></li>
+                            <li><a href="../index.php#sec05">アクセス</a></li>
                             <?php if (isset($login_user)) : ?>
                             <li><a href="../mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>
@@ -107,6 +112,18 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
                 <p><?php echo h($user->user_name); ?>様</p>
                 <p><?php echo h($user->booktime); ?></p>
                 <button class='submit' onclick="location.href='../index.php'">ホームに戻る</button>
+                <?php
+      mb_language("Japanese");
+      mb_internal_encoding("UTF-8");
+      $to = 'naganuma514@icloud.com';
+      $title = "新規予約が入りました";
+      $content =h($user->user_name).h($user->booktime);
+      if(mb_send_mail($to, $title, $content)){
+        echo "メールを送信しました";
+      } else {
+        echo "メールの送信に失敗しました";
+      };
+    ?>
                 <?php else  : ?>
                 <h1>予約に失敗しました。<br>
                     もう一度日時を選択してください。</h1>

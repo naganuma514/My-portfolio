@@ -48,10 +48,10 @@ if (isset($_SESSION["login_user"])) {
                     <p id="menuWrap"><a id="menu"><span id="menuBtn"></span></a></p>
                     <div class="panel">
                         <ul>
-                            <li><a href="../index.php #top">トップ</a></li>
-                            <li><a href="../index.php #sec01">メッセージ</a></li>
-                            <li><a href="../index.php #sec04">ポートフォリオ</a></li>
-                            <li><a href="../index.php #sec05">アクセス</a></li>
+                            <li><a href="../index.php#top">トップ</a></li>
+                            <li><a href="../index.php#sec01">メッセージ</a></li>
+                            <li><a href="../index.php#sec04">ポートフォリオ</a></li>
+                            <li><a href="../index.php#sec05">アクセス</a></li>
                             <?php if (isset($login_user)) : ?>
                             <li><a href="../mypage/mypage.php">マイページ</a></li>
                             <?php else : ?>

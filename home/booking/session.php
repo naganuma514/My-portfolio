@@ -57,4 +57,17 @@ function booktimes() {
             </div>";
             exit;
 }
+
+function bookMail($email,$user_name,$booktime) {
+    mb_language("Japanese");
+    mb_internal_encoding("UTF-8");
+    $to = 'naganuma514@icloud.com,$email';
+    $title = "新規ご予約ありがとうございます！";
+    $content =$user_name.$booktime."ご予約ありがとうございました。現在は当サイトからの予約受付は行っておりません。";
+    if(mb_send_mail($to, $title, $content)){
+      echo "メールを送信しました";
+    } else {
+      echo "メールの送信に失敗しました";
+    };
+}
 ?>

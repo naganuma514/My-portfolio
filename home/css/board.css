@@ -179,7 +179,15 @@ input[type="text"]
 }
 
 .star5_rating[data-rate="5"]:after{ width: 100%; } /* 星5 */
-.star5_rating[data-rate="4.5"]:after{ width: 90%; } /* 星4.5 */
+.star5_rating[data-rate="4.9"]:after{ width: 98%; }
+.star5_rating[data-rate="4.8"]:after{ width: 96%; }
+.star5_rating[data-rate="4.7"]:after{ width: 94%; }
+.star5_rating[data-rate="4.6"]:after{ width: 92%; }
+.star5_rating[data-rate="4.5"]:after{ width: 90%; }
+.star5_rating[data-rate="4.4"]:after{ width: 88%; }
+.star5_rating[data-rate="4.3"]:after{ width: 86%; }
+.star5_rating[data-rate="4.2"]:after{ width: 84%; }
+.star5_rating[data-rate="4.1"]:after{ width: 82%; }
 .star5_rating[data-rate="4"]:after{ width: 80%; } /* 星4 */
 .star5_rating[data-rate="3.5"]:after{ width: 70%; } /* 星3.5 */
 .star5_rating[data-rate="3"]:after{ width: 60%; } /* 星3 */
